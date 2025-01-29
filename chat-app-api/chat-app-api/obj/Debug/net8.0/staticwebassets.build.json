@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "Rzrr7/NOBcwhixM00VWyB/WXUQPIZovJ6XVFtvfM2aA=",
+  "Source": "chat-app-api",
+  "BasePath": "_content/chat-app-api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
