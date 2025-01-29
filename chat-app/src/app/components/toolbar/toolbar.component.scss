@@ -16,10 +16,11 @@ mat-toolbar {
 .top-right-buttons button {
   color: purple;
   display: flex;
+  margin: 5px;
   justify-content: center;
   align-items: center;
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
 }
 
 .custom-icon-size {
