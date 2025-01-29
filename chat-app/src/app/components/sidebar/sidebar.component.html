@@ -1,0 +1,24 @@
+<div>
+  <h2>Active Chats</h2>
+</div>
+<div>
+  <mat-list>
+  @for (user of users; track user) {
+    <mat-list-item>
+      <img matListItemAvatar src='{{user.profilePic}}'/>
+      <h3 matListItemTitle matBadge="10">{{ user.name }}</h3>
+      <p matListItemLine>
+        @if (user.active) {
+          <mat-icon style='color: lightgreen'>check_circle</mat-icon>
+        } @else {
+          <mat-icon style='color: red'>close</mat-icon>
+        }
+      </p>
+    </mat-list-item>
+  }
+  </mat-list>
+</div>
+<button mat-icon-button>
+  <mat-icon>add_circle</mat-icon>
+</button>
+<h3 matBadge="10" matBadgeOverlap="false">Test</h3>

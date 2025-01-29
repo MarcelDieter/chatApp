@@ -1,0 +1,32 @@
+<div class='form-and-message-container'>
+  <div id='messagesContainer'>
+    @for (message of messages; track message) {
+      <div class='message'>
+        <div class='date'>
+          <p>{{ message.date?.day }}. {{ message.date?.month }} {{ message.date?.year }}</p>
+        </div>
+        <mat-divider></mat-divider>
+        <mat-card>
+          <mat-card-header>
+            <img mat-card-avatar src='{{ message.user.profilePic }}'>
+            <mat-card-title>{{ message.user.name }}</mat-card-title>
+            <mat-card-subtitle>{{ message.date?.time }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ message.content }}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>  
+    }
+  </div>
+  
+  
+  <div class='form-container'>
+    <mat-form-field class='inputField' appearance="fill">
+      <input [(ngModel)]='inputMessage' matInput (keydown.enter)="addMessage()">
+    </mat-form-field>
+    <button mat-icon-button (click)='addMessage()'>
+      <mat-icon class='large-icon'>arrow_circle_right</mat-icon>
+    </button>
+  </div>
+</div>

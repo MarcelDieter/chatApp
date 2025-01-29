@@ -1,0 +1,108 @@
+:host {
+  width: 100%;
+  display: block;
+  background-color: #2c1c06;
+  color: white;
+  height: calc(100vh - 80px);
+}
+
+.form-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+
+}
+
+.form-and-message-container {
+  display: flex;
+  flex-direction: column;
+  left: 330px;
+  position: absolute;
+  bottom: 20px;
+  justify-content: center;
+  align-items: center;
+  // background-color: green;
+  width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+}
+
+.inputField {
+  width: 600px;
+}
+
+button {
+  color: white;
+}
+
+.large-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 40px;
+}
+
+.larger-icon:hover {
+  cursor: pointer;
+}
+
+#messagesContainer {
+  width: 1000px;
+  height: 750px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  margin: 10px;
+  background-color: rgb(55, 55, 61);
+  border-radius: 20px;
+  overflow-wrap: break-word;
+}
+
+mat-card-subtitle {
+  color: rgba(255, 255, 255, 0.356);
+}
+
+mat-card {
+  background-color: rgb(55, 55, 61);
+}
+
+mat-divider {
+  border-top-width: 2px;
+  border-top-color: rgb(255, 255, 255);
+}
+
+.date {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #2c1c06;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(55, 55, 61);
+  border-radius: 100vw;
+}
+
+mat-card-header {
+  height: 40px;
+}
+
+mat-card-title {
+  font-size: 20px;
+}
+
+mat-card-subtitle {
+  font-size: 15px;
+}
+

@@ -1,0 +1,29 @@
+mat-toolbar {
+  color: purple;
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  background-color: rgb(34, 33, 33);
+  font-size: 40px;
+  z-index: 100;
+}
+
+.top-right-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.top-right-buttons button {
+  color: purple;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+}
+
+.custom-icon-size {
+  height: 40px;
+  width: 40px;
+  font-size: 40px;
+}

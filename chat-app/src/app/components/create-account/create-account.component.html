@@ -1,0 +1,14 @@
+<h2 mat-dialog-title style='font-weight: bold;'>Create Account:</h2>
+<mat-dialog-content></mat-dialog-content>
+<mat-form-field floatLabel='auto' appearance="fill">
+  <mat-label>User Name</mat-label>
+  <input matInput required>
+</mat-form-field>
+<mat-form-field floatLabel='auto'>
+  <mat-label>Password</mat-label>
+  <input matInput required type='password'>
+</mat-form-field>
+<mat-dialog-actions>
+  <button mat-button (click)='createAccount()'>Create Account</button>
+  <button mat-button (click)='cancel()'>Cancel</button>
+</mat-dialog-actions>
