@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MaterialModule } from '../../material/material.module';
+import { MaterialModule } from '../../modules/material.module';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../login/login.component';
 

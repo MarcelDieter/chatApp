@@ -7,6 +7,7 @@ import { CreateAccountComponent } from '../create-account/create-account.compone
 import { MatIcon } from '@angular/material/icon';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '../../modules/forms.module';
 
 @Component({
   selector: 'app-login',
@@ -25,10 +26,13 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       username: ['',Validators.required],
       password: ['', Validators.required]
-    })
+    });
   }
 
-  login() {}
+  login() {
+    this.loginForm?.value;
+  }
+
   openCreateAccount() {
     this.dialogRef.close();
     this.dialog.open(CreateAccountComponent);

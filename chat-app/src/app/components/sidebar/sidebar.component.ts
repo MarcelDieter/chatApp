@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { User } from '../../user';
 import { UserService } from '../../services/user.service';
-import { MaterialModule } from '../../material/material.module';
+import { MaterialModule } from '../../modules/material.module';
 
 @Component({
   selector: 'app-sidebar',

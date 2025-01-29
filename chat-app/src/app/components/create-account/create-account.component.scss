@@ -7,3 +7,13 @@ mat-dialog-options {
   display: flex;
   justify-content: center;
 }
+
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+input-container {
+  display: flex;
+  flex-direction: row;
+}

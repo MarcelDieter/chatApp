@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MaterialModule } from '../../material/material.module';
+import { MaterialModule } from '../../modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { TimeAndDate } from '../../time-and-date';
 import { Message } from '../../message';
