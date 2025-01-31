@@ -38,4 +38,15 @@ export class TimeAndDate {
     ];
     this.month = MONTH[date.getMonth()];
   }
+
+  getWholeDate() {
+    return this.day + '. ' + this.month + ' ' + this.year;
+  }
+
+  dateIsEqualTo(otherDate: TimeAndDate | null) { 
+    if (!otherDate) {
+      return null;
+    }
+    return this.day == otherDate.day && this.month == otherDate.month && this.year == otherDate.year;
+  } 
 }

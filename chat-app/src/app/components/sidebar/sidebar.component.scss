@@ -12,14 +12,20 @@ mat-badge-medium.mat-badge-above .mat-badge-content {
   right: unset;
 }
 
-mat-list-item  {
+// button.mat-list-item {
+//   width: 150px;
+//   margin: 10px;
+//   border-radius: 15px;
+// }
+
+mat-action-list button {
   width: 150px;
   margin: 10px;
   border-radius: 15px;
 }
 
-mat-list-item:hover {
-  background-color: rgba(116, 113, 113, 0.534);
+mat-action-list button:hover {
+  background-color: rgba(36, 32, 32, 0.534);
 }
 
 mat-list-item h3 {

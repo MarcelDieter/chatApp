@@ -1,10 +1,12 @@
 <div class='form-and-message-container'>
   <div id='messagesContainer'>
-    @for (message of messages; track message) {
-      <div class='message'>
+    @for (message of messages; track message; let i = $index) {
+      @if (i == 0 || !message.date?.dateIsEqualTo(messages[i - 1].date)) {
         <div class='date'>
-          <p>{{ message.date?.day }}. {{ message.date?.month }} {{ message.date?.year }}</p>
+          <p>{{ message.date?.getWholeDate() }}</p>
         </div>
+      }
+      <div class='message'>
         <mat-divider></mat-divider>
         <mat-card>
           <mat-card-header>
@@ -14,6 +16,7 @@
           </mat-card-header>
           <mat-card-content>
             <p>{{ message.content }}</p>
+
           </mat-card-content>
         </mat-card>
       </div>  

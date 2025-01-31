@@ -48,7 +48,7 @@ button {
 
 #messagesContainer {
   width: 1000px;
-  height: 750px;
+  max-height: 680px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;

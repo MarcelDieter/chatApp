@@ -2,9 +2,9 @@
   <h2>Active Chats</h2>
 </div>
 <div>
-  <mat-list>
+  <mat-action-list>
   @for (user of users; track user) {
-    <mat-list-item>
+    <button mat-list-item>
       <img matListItemAvatar src='{{user.profilePic}}'/>
       <h3 matListItemTitle matBadge="10">{{ user.name }}</h3>
       <p matListItemLine>
@@ -14,11 +14,11 @@
           <mat-icon style='color: red'>close</mat-icon>
         }
       </p>
-    </mat-list-item>
+    </button>
   }
-  </mat-list>
+  </mat-action-list>
 </div>
-<button mat-icon-button>
+<button mat-icon-button matTooltip='Start new chat' matTooltipPosition="after">
   <mat-icon>add_circle</mat-icon>
 </button>
 <h3 matBadge="10" matBadgeOverlap="false">Test</h3>
