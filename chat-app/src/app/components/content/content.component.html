@@ -3,11 +3,12 @@
     @for (message of messages; track message; let i = $index) {
       @if (i == 0 || !message.date?.dateIsEqualTo(messages[i - 1].date)) {
         <div class='date'>
+          <mat-divider></mat-divider>
           <p>{{ message.date?.getWholeDate() }}</p>
+          <mat-divider></mat-divider>
         </div>
       }
       <div class='message'>
-        <mat-divider></mat-divider>
         <mat-card>
           <mat-card-header>
             <img mat-card-avatar src='{{ message.user.profilePic }}'>
@@ -16,7 +17,6 @@
           </mat-card-header>
           <mat-card-content>
             <p>{{ message.content }}</p>
-
           </mat-card-content>
         </mat-card>
       </div>  
@@ -33,3 +33,5 @@
     </button>
   </div>
 </div>
+
+<!-- <button (click)='changeDate()'>Change date</button> -->

@@ -77,7 +77,12 @@ mat-divider {
 .date {
   display: flex;
   justify-content: center;
+  align-items: center;
   height: 40px;
+}
+
+.date p {
+  margin: 0 10px 0 10px;
 }
 
 
@@ -106,3 +111,8 @@ mat-card-subtitle {
   font-size: 15px;
 }
 
+mat-divider {
+  border: solid 2px white;
+  border-radius: 100vw;
+  flex-grow: 1;
+}

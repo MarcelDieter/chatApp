@@ -24,6 +24,8 @@ export class ContentComponent {
     ),
   ];
 
+  timeChanged = false;
+
   scrollToBottom(id: string) {
     const element = document.getElementById(id);
     if (element) {
@@ -42,7 +44,7 @@ export class ContentComponent {
         active: false,
       },
       this.inputMessage,
-      new TimeAndDate(new Date())
+      this.getNewTime()
     );
     this.messages.push(newMesage);
     this.inputMessage = '';
@@ -50,6 +52,19 @@ export class ContentComponent {
 
   ngAfterViewChecked() {
     this.scrollToBottom('messagesContainer');
+  }
+
+  changeDate() {
+    this.timeChanged = true;
+  }
+
+  getNewTime() {
+    let newTimeAndDate = new TimeAndDate(new Date());      //check to see whether the time separation feature works
+    if (this.timeChanged) {
+      newTimeAndDate.day += 1;
+      this.timeChanged = false;
+    }
+    return newTimeAndDate;
   }
 
 }
