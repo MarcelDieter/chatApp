@@ -2,6 +2,9 @@
 @if (createForm) {
   <form [formGroup]='createForm'>
     <mat-dialog-content>
+      <div>
+        <input type='file' (change)='onFileSelected($event)'>
+      </div>
       <div class='input-container'>
         <mat-icon>person</mat-icon>
         <mat-form-field floatLabel='auto'>

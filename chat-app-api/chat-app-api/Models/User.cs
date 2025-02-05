@@ -8,7 +8,9 @@ namespace chat_app_api.Models
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string Token { get; set; }
-        public string Role { get; set; }
+        public byte[]? ProfilePic { get; set; }
+        public string? Active { get; set; }
+        public string? Token { get; set; }
+        public string? Role { get; set; }
     }
 }

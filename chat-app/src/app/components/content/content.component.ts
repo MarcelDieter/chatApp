@@ -1,8 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MaterialModule } from '../../modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { TimeAndDate } from '../../time-and-date';
 import { Message } from '../../message';
+import { MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../login/login.component';
+import { CreateAccountComponent } from '../create-account/create-account.component';
 
 @Component({
   selector: 'app-content',
@@ -15,8 +18,10 @@ export class ContentComponent {
   messages: Message[] = [
     new Message(
       {
-        name: 'test user',
+        id: 0,
+        username: 'test user',
         profilePic: '/profilePics/shiba1.jpg',
+        password: 'admin',
         active: false,
       },
       'test message',
@@ -39,8 +44,10 @@ export class ContentComponent {
     }
     let newMesage: Message = new Message(
       {
-        name: 'test user',
+        id: 0,
+        username: 'test user',
         profilePic: '/profilePics/shiba1.jpg',
+        password: 'admin',
         active: false,
       },
       this.inputMessage,
@@ -66,5 +73,14 @@ export class ContentComponent {
     }
     return newTimeAndDate;
   }
+
+  ngOnInit() {
+    this.openLogin();
+  }
+  private dialog = inject(MatDialog);
+  
+    openLogin() {
+      this.dialog.open(CreateAccountComponent);
+    };
 
 }

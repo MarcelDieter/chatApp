@@ -7,34 +7,33 @@
   color: white;
 }
 
-mat-badge-medium.mat-badge-above .mat-badge-content {
-  top: unset;
-  right: unset;
-}
 
-// button.mat-list-item {
+
+// button.mat-list-item {     //mat-list-item
 //   width: 150px;
 //   margin: 10px;
 //   border-radius: 15px;
 // }
 
 mat-action-list button {
-  width: 150px;
+  width: 170px;
   margin: 10px;
-  border-radius: 15px;
+  border-radius: 20px;
+}
+
+mat-action-list button * {
+  color: whitesmoke;
 }
 
 mat-action-list button:hover {
   background-color: rgba(36, 32, 32, 0.534);
+
 }
 
-mat-list-item h3 {
-  color: whitesmoke;
+button p {
+  margin-top: 5px; 
 }
-
-button {
-  color: white;
-}
+userName
 
 mat-sidenav-container {
   height: 100%;
@@ -42,4 +41,8 @@ mat-sidenav-container {
 
 p mat-icon {
   color: green;
+}
+
+.add-chat {
+  color: white;
 }

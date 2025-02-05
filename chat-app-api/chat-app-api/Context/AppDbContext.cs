@@ -9,9 +9,7 @@ namespace chat_app_api.Context
         {
             
         }
-
         public DbSet<User> Users { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("users");

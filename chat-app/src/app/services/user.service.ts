@@ -7,18 +7,24 @@ import { User } from '../user';
 export class UserService {
   users: User[] = [
     {
-      name: 'user1',
+      id: 0,
+      username: 'user1',
       profilePic: '/profilePics/shiba1.jpg',
+      password: '',
       active: false,
     },
     {
-      name: 'user2',
+      id: 0,
+      username: 'user2',
       profilePic: '/profilePics/f0d4011c75b92f165dbab83c8654ebf1.jpg',
+      password: '',
       active: true,
     },
     {
-      name: 'user3',
+      id: 0,
+      username: 'user3',
       profilePic: '/profilePics/cutest-dog-breeds-jpg.jpg',
+      password: '',
       active: false,
     },
   ];

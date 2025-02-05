@@ -6,7 +6,8 @@
   @for (user of users; track user) {
     <button mat-list-item>
       <img matListItemAvatar src='{{user.profilePic}}'/>
-      <h3 matListItemTitle matBadge="10">{{ user.name }}</h3>
+      <h3 matListItemTitle class='userName'>
+        <span matBadge="10" matBadgeOverlap="false">{{ user.username }}</span></h3>
       <p matListItemLine>
         @if (user.active) {
           <mat-icon style='color: lightgreen'>check_circle</mat-icon>
@@ -18,7 +19,6 @@
   }
   </mat-action-list>
 </div>
-<button mat-icon-button matTooltip='Start new chat' matTooltipPosition="after">
+<button mat-icon-button class='add-chat' matTooltip='Start new chat' matTooltipPosition="after">
   <mat-icon>add_circle</mat-icon>
 </button>
-<h3 matBadge="10" matBadgeOverlap="false">Test</h3>

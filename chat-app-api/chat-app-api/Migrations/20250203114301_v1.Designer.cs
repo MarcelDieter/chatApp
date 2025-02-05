@@ -11,7 +11,7 @@ using chat_app_api.Context;
 namespace chat_app_api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250129150325_v1")]
+    [Migration("20250203114301_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -32,16 +32,20 @@ namespace chat_app_api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Active")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<byte[]>("ProfilePic")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("Role")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Token")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")

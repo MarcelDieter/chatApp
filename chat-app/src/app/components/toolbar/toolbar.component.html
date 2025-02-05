@@ -4,7 +4,7 @@
     <mat-icon class='custom-icon-size'>chat</mat-icon>
   </div>
   <div class='top-right-buttons'>
-    @if (!loggedin) {
+    @if (!loggedin()) {
       <button mat-icon-button (click)='openLogin()'>
         <mat-icon class='custom-icon-size'>login</mat-icon>
       </button>

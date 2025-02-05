@@ -8,6 +8,8 @@ import { MatIcon } from '@angular/material/icon';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '../../modules/forms.module';
+import { AuthService } from '../../services/auth.service';
+import { LoggedInService } from '../../services/logged-in.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,8 @@ export class LoginComponent implements OnInit {
   private dialog = inject(MatDialog);
   private dialogRef = inject(MatDialogRef<LoginComponent>);
   private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  loggedInService = inject(LoggedInService);
   
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -30,7 +34,18 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loginForm?.value;
+    if (this.loginForm?.valid) {
+      this.authService.login(this.loginForm.value).subscribe({
+        next:(res) => {
+          alert(res.message)
+          console.log("Test");
+          this.loggedInService.loggedIn.set(true);
+        },
+        error:(err) => {
+          alert(err.error.message);
+        }
+      });
+    }
   }
 
   openCreateAccount() {
