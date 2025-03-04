@@ -66,7 +66,7 @@ namespace chat_app_api.Services.AuthService
                 {
                     UserId = user.UserId,
                     Username = user.Username,
-                    ProfilePic = user.ProfilePicUrl,
+                    ProfilePicUrl = user.ProfilePicUrl,
                     Active = user.Active,
                 },
                 Tokens = await CreateTokenResponse(user)
@@ -165,7 +165,7 @@ namespace chat_app_api.Services.AuthService
                 issuer: _configuration.GetValue<string>("AppSettings:Issuer"),
                 audience: _configuration.GetValue<string>("AppSettings:Audience"),
                 claims: claims,
-                expires: DateTime.Now.AddSeconds(10),
+                expires: DateTime.Now.AddMinutes(10),
                 signingCredentials: creds
             );
 
@@ -202,11 +202,11 @@ namespace chat_app_api.Services.AuthService
                 File.Delete(imagePath);
             }
 
-            if (user.ProfilePic != null)
+            if (user.ProfilePicUrl != null)
             {
                 using (FileStream stream = File.Create(imagePath))
                 {
-                    await user.ProfilePic.CopyToAsync(stream);
+                    await user.ProfilePicUrl.CopyToAsync(stream);
                 }
             }
             else

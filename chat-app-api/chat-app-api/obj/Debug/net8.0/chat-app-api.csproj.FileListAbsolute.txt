@@ -179,4 +179,5 @@ C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8
 C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\chat-app-api.staticwebassets.runtime.json
 C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\Fleck.dll
 C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\obj\Debug\net8.0\chat-app-api.sourcelink.json
 C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

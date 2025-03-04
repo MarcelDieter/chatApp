@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserService } from './user.service';
 import { Message } from '../models/message';
+import { UserDataService } from './user-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class ConversationService {
   private baseUrl = 'https://localhost:7062/api/conversation';
   private http = inject(HttpClient);
   private userService = inject(UserService);
+  private userDataService = inject(UserDataService);
   constructor() {}
 
   createConversationWith(userId: number): Observable<number>{
@@ -38,12 +40,13 @@ export class ConversationService {
 
   startConversation(message: Message) {
     let user = this.userService.getUserById(message.senderId);
-    if (user) {
+    let ownUserId = this.userDataService.user()?.userId;
+    if (user && ownUserId) {
       let newConversation: Conversation = {
         conversationId: message.conversationId,
         profilePicUrl: user.profilePicUrl,
         messages: [],
-        membersId: [user.userId],
+        memberIds: [ownUserId, user.userId],
       };
       this.addConversation(newConversation);
     }

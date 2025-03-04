@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserListComponent } from '../user-list/user-list.component';
 import { Conversation } from '../../models/conversation';
 import { ConversationService } from '../../services/conversation.service';
+import { UserDataService } from '../../services/user-data.service';
 @Component({
   selector: 'app-sidebar',
   imports: [MaterialModule],
@@ -14,7 +15,8 @@ import { ConversationService } from '../../services/conversation.service';
 })
 export class SidebarComponent implements OnInit{
   private userService = inject(UserService);
-  private chatService = inject(ConversationService)
+  private userDataService = inject(UserDataService);
+  private chatService = inject(ConversationService);
   private dialog = inject(MatDialog);
 
   conversationList = this.chatService.conversationList;
@@ -30,7 +32,12 @@ export class SidebarComponent implements OnInit{
     this.chatService.displayConversation(conversationId);
   }
 
-  getUserById(userId: number) {
-    return this.userService.getUserById(userId);
+  getUserById(conversation: Conversation) {
+    let userId = conversation.memberIds.find(id => id != this.userDataService.user()?.userId);
+    if (!userId) {
+      return;
+    }
+    let user = this.userService.getUserById(userId);
+    return user;
   }
 }

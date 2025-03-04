@@ -85,7 +85,7 @@
         "IsRequired": false
       },
       {
-        "Name": "ProfilePic",
+        "Name": "ProfilePicUrl",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       }

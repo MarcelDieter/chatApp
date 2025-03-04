@@ -28,7 +28,6 @@ namespace chat_app_api.Controllers
             _authService = authService;
             _userService = userService; 
         }
-        public static User user = new User();
 
 
         [HttpPost("register")]

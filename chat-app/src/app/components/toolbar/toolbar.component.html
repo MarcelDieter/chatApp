@@ -9,8 +9,8 @@
         <mat-icon class='custom-icon-size'>login</mat-icon>
       </button>
     } @else {
-        <img [src]='user()?.profilePicUrl' alt='ProfilBild'>
-         <button mat-icon-button (click)='logout(user()?.username)'>
+        <img [src]='user()?.profilePicUrl' alt='ProfilBild' matTooltip={{user()?.username}}>
+        <button mat-icon-button (click)='logout(user()?.username)'>
         <mat-icon class='custom-icon-size'>logout</mat-icon>
       </button>
     }

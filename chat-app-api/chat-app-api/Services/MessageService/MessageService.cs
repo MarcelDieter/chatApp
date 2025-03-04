@@ -11,7 +11,7 @@ namespace chat_app_api.Services.MessageService
         {
             _context = context;
         }
-        public async Task<int> StoreMessage(Message message)
+        public async Task<int?> StoreMessage(Message message)
         {
             _context.Messages.Add(message);
             await _context.SaveChangesAsync();

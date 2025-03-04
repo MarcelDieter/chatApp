@@ -48,6 +48,7 @@ namespace chat_app_api.Services.WebSocketService
 
                socket.OnMessage = async message =>
                 {
+                    var mess = message;
                     Message messageObject = JsonConvert.DeserializeObject<Message>(message);
                     using (IServiceScope scope = _serviceScopeFactory.CreateScope())
                     {
@@ -103,11 +104,11 @@ namespace chat_app_api.Services.WebSocketService
         public void Login(int userId, string wsId)
         {
             var connection = _wsConnections.Where(kvp => kvp.Key == wsId).FirstOrDefault();
-            if (!_wsLoggedInConnections.ContainsKey(userId))
-            {
+            //if (!_wsLoggedInConnections.ContainsKey(userId))
+            //{
             _wsLoggedInConnections.Add(userId, connection.Value);
             ChangeUserActivityStatus(userId, true);
-            }
+            //}
         }
 
         private void RemoveLoggedInConnection(string wsId)

@@ -8,8 +8,8 @@ namespace chat_app_api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        UserService _userService;
-        public UserController(UserService userService)
+        IUserService _userService;
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }
@@ -17,7 +17,8 @@ namespace chat_app_api.Controllers
         [HttpGet("users")]
         public async Task<ActionResult> GetUsers()
         {
-            return Ok(await _userService.getAllUsers());
+            var users = await _userService.getAllUsers();
+            return Ok(users);
         }
     }
 }

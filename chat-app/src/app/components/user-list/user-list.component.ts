@@ -2,31 +2,33 @@ import { Component, inject, signal } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { UserService } from '../../services/user.service';
-import { User } from '../../models/user';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { ConversationService } from '../../services/conversation.service';
 import { Conversation } from '../../models/conversation';
-import { Message } from '../../models/message';
-import { v4 as uuidv4 } from 'uuid';
 import { UserData } from '../../models/userdata';
+import { MaterialModule } from '../../modules/material.module';
+import { UserDataService } from '../../services/user-data.service';
 
 
 @Component({
   selector: 'app-user-list',
-  imports: [MatListModule, MatButtonModule, MatIconModule],
+  imports: [MaterialModule],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
 export class UserListComponent {
   private userService = inject(UserService);
   private conversationService = inject(ConversationService);
+  private userDataService = inject(UserDataService);
   users = this.userService.userList;
+  createGroupToggle = false;
 
   private dialogRef = inject(MatDialogRef<SidebarComponent>);
 
   startConversation(user: UserData) {
+    let ownUserId = this.userDataService.user()?.userId;
+    if (!ownUserId) {
+      return;
+    }
     this.conversationService.createConversationWith(user.userId).subscribe({
       next: conversationId => {
         if (conversationId) {
@@ -34,7 +36,7 @@ export class UserListComponent {
             conversationId: conversationId, 
             messages: [],
             profilePicUrl: user.profilePicUrl,
-            membersId: [user.userId]
+            memberIds: [ownUserId, user.userId]
             };
             this.conversationService.addConversation(newConversation);
         }
@@ -43,15 +45,32 @@ export class UserListComponent {
         console.log(err);
       }
     });
-
-
   }
 
   conversationWithUserExists(userId: number) {
-    return this.conversationService.conversationList().some(conversation => conversation.membersId.includes(userId) && conversation.membersId.length == 1);
+    return this.conversationService.conversationList().some(conversation => {
+      let isIncluded = conversation.memberIds.includes(userId);
+      let lenght = conversation.memberIds.length;
+      return isIncluded && lenght == 2;
+    });
   }
 
   createGroupConversation() {
-
+    this.createGroupToggle = true;
   }
+
+  // onFileSelected(event: Event) {
+  //   if (!event || !event.target) {
+  //     return;
+  //   }
+  //   const input = event.target as HTMLInputElement;
+
+  //   if (input.files && input.files[0]) {
+  //     this.selectedFile = input.files[0];
+  //     this.previewImage();
+  //     if (this.createForm) {
+  //       this.createForm.pattchValue({ profilePicUrl})
+  //     }
+  //   }
+  // }
 }

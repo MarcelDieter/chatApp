@@ -14,6 +14,10 @@
           "content": {
             "multipart/form-data": {
               "schema": {
+                "required": [
+                  "Password",
+                  "Username"
+                ],
                 "type": "object",
                 "properties": {
                   "Id": {
@@ -26,7 +30,7 @@
                   "Password": {
                     "type": "string"
                   },
-                  "ProfilePic": {
+                  "ProfilePicUrl": {
                     "type": "string",
                     "format": "binary"
                   }
@@ -42,7 +46,7 @@
                 "Password": {
                   "style": "form"
                 },
-                "ProfilePic": {
+                "ProfilePicUrl": {
                   "style": "form"
                 }
               }
@@ -276,6 +280,10 @@
   "components": {
     "schemas": {
       "LoginResponse": {
+        "required": [
+          "tokens",
+          "userData"
+        ],
         "type": "object",
         "properties": {
           "userData": {
@@ -288,6 +296,11 @@
         "additionalProperties": false
       },
       "LoginUser": {
+        "required": [
+          "password",
+          "username",
+          "wsId"
+        ],
         "type": "object",
         "properties": {
           "username": {
@@ -341,6 +354,10 @@
         "additionalProperties": false
       },
       "UserData": {
+        "required": [
+          "profilePicUrl",
+          "username"
+        ],
         "type": "object",
         "properties": {
           "userId": {
@@ -351,7 +368,7 @@
             "type": "string",
             "nullable": true
           },
-          "profilePic": {
+          "profilePicUrl": {
             "type": "string",
             "nullable": true
           },

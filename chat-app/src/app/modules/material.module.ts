@@ -11,7 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
-import { MatTooltip } from '@angular/material/tooltip'
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 const material = [
   MatListModule,
@@ -27,7 +28,7 @@ const material = [
   MatCardModule,
   MatDivider,
   MatTooltip,
-  
+  MatProgressSpinner
 ]
 
 @NgModule({

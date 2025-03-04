@@ -1,4 +1,5 @@
 <div class='dialog'>
+  <div>
   <div class='heading'>
     <h3>Select User to start new Chat:</h3>
   </div>
@@ -17,8 +18,19 @@
       </mat-list-item>
     }
   </mat-list>
-  <button mat-icon-button class='create-group' matToolTip='Create group Chat' (click)='createGroupConversation()'> 
-    <mat-icon>groups</mat-icon>
-    <mat-icon>add</mat-icon>
+  </div>
+  <button mat-raised-button class='create-group' matTooltip='Create group Chat' (click)='createGroupConversation()'> 
+    <div>
+      <mat-icon>groups</mat-icon>
+      <mat-icon>add</mat-icon>
+    </div>
   </button>
+  <!-- @if (createGroupToggle) {
+    <div class='profilePic'>
+        Your Profile Picture:
+        <img [src]='imageDisplayed' (click)='fileInput.click()'>
+        <input type='file' #fileInput (change)='onFileSelected($event)' style='display: none'>
+      </div>
+      <mat-icon>group_add</mat-icon>    //blue
+  } -->
 </div>

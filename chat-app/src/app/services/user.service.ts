@@ -52,7 +52,8 @@ export class UserService {
   }
  
   getUserById(userId: number) {
-    let user = this.userList().find(user => user.userId = userId);
+    let userList = this.userList();
+    let user = userList.find(user => user.userId == userId);
     return user;
   }
 

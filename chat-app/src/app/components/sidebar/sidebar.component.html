@@ -4,12 +4,13 @@
 <div>
   <mat-action-list>
   @for (conversation of conversationList(); track conversation) {
+    @let user = getUserById(conversation);
     <button mat-list-item (click)='displayChat(conversation.conversationId)'>
-      <img matListItemAvatar src='{{ getUserById(conversation.membersId[0])?.profilePicUrl }}'/>
+      <img matListItemAvatar src='{{ user?.profilePicUrl }}'/>
       <h3 matListItemTitle class='chatName'>
-        <span matBadge="10" matBadgeOverlap="false">{{ getUserById(conversation.membersId[0])?.username }}</span></h3>
+        <span matBadge="10" matBadgeOverlap="false">{{ user?.username }}</span></h3>
       <p matListItemLine>
-        @if (getUserById(conversation.membersId[0])?.active) {
+        @if (user?.active) {
           <mat-icon style='color: lightgreen'>check_circle</mat-icon>
         } @else {
           <mat-icon style='color: red'>close</mat-icon>

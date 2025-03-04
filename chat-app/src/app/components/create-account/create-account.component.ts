@@ -87,7 +87,7 @@ export class CreateAccountComponent implements OnInit {
       this.selectedFile = input.files[0];
       this.previewImage();
       if (this.createForm) {
-        this.createForm.patchValue({ profilePic: this.selectedFile });
+        this.createForm.patchValue({ profilePicUrl: this.selectedFile });
       }
     }
   }

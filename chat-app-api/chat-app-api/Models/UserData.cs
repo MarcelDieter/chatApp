@@ -6,7 +6,7 @@ namespace chat_app_api.Models
     {
         public int UserId { get; set; }
         public required string Username { get; set; }
-        public required string ProfilePic { get; set; }
+        public required string ProfilePicUrl { get; set; }
         public bool Active { get; set; }
 
     }

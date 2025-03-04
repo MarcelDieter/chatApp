@@ -1,6 +1,7 @@
 .heading {
   display: flex;
   justify-self: center;
+  color: rgb(71, 63, 52);
 }
 
 mat-list {
@@ -14,22 +15,32 @@ mat-list-item {
   background-color: rgb(255, 255, 255);
   border-radius: 1rem;
   margin: 1rem 0.5rem 0rem 0.5rem;
-  width: 15rem;
+  width: 13rem;
 }
 
 .dialog {
-  background-color: rgb(156, 160, 156);
+  background-color: rgb(172, 164, 164);
   height: 40rem;
   width: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
 }
 
 .list-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.5rem;
+  font-size: 1rem;
 
   button {
     color: rgb(77, 228, 77);
   }
+}
+
+.create-group {
+  width: 6rem;
+  display: flex;
+  justify-content: center;
 }

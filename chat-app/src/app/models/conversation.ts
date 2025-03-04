@@ -6,5 +6,5 @@ export interface Conversation {
   conversationId: number;
   profilePicUrl: string,
   messages: Message[];
-  membersId : number[]; 
+  memberIds : number[]; 
 }
