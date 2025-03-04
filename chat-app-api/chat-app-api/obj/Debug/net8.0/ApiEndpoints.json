@@ -1,24 +1,70 @@
 [
   {
-    "ContainingType": "chat_app_api.Controllers.UserController",
+    "ContainingType": "chat_app_api.Controllers.AuthController",
     "Method": "Authenticate",
-    "RelativePath": "api/User/authenticate",
+    "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "userObj",
-        "Type": "chat_app_api.LoginUser",
+        "Type": "chat_app_api.Models.LoginUser",
         "IsRequired": true
       }
     ],
+    "ReturnTypes": [
+      {
+        "Type": "chat_app_api.Models.LoginResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.AuthController",
+    "Method": "Logout",
+    "RelativePath": "api/Auth/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "chat_app_api.Controllers.UserController",
+    "ContainingType": "chat_app_api.Controllers.AuthController",
+    "Method": "RefreshToken",
+    "RelativePath": "api/Auth/refresh-tokens",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "refresh",
+        "Type": "chat_app_api.Models.RefreshTokenRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "chat_app_api.Models.TokenResponseDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.AuthController",
     "Method": "RegisterUser",
-    "RelativePath": "api/User/register",
+    "RelativePath": "api/Auth/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -29,7 +75,7 @@
         "IsRequired": false
       },
       {
-        "Name": "UserName",
+        "Name": "Username",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -44,6 +90,42 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.AuthController",
+    "Method": "RevokeToken",
+    "RelativePath": "api/Auth/revoke-token",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.ConversationController",
+    "Method": "StartConversation",
+    "RelativePath": "api/Conversation/start-conversation/{userId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.UserController",
+    "Method": "GetUsers",
+    "RelativePath": "api/User/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

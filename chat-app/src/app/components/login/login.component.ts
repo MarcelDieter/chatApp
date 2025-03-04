@@ -9,13 +9,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '../../modules/forms.module';
 import { AuthService } from '../../services/auth.service';
-import { LoggedInService } from '../../services/logged-in.service';
+import { UserDataService } from '../../services/user-data.service';
+import { WebsocketService } from '../../services/websocket.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
-  imports: [MatDialogModule, MatButtonModule, MatFormFieldModule, MatInput, MatIcon, ReactiveFormsModule],
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInput,
+    MatIcon,
+    ReactiveFormsModule,
+  ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
   loginForm?: FormGroup;
@@ -24,26 +33,32 @@ export class LoginComponent implements OnInit {
   private dialogRef = inject(MatDialogRef<LoginComponent>);
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
-  loggedInService = inject(LoggedInService);
-  
+  private userDataService = inject(UserDataService);
+  private userService = inject(UserService);
+  private websocketService = inject(WebsocketService);
+
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      username: ['',Validators.required],
-      password: ['', Validators.required]
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      wsId: [null],
     });
   }
 
   login() {
     if (this.loginForm?.valid) {
+      this.loginForm.patchValue({ wsId: this.websocketService.wsId});
       this.authService.login(this.loginForm.value).subscribe({
-        next:(res) => {
-          alert(res.message)
-          console.log("Test");
-          this.loggedInService.loggedIn.set(true);
+        next: (loginResponse) => {
+          localStorage.setItem('authToken', loginResponse.tokens.accessToken);
+          localStorage.setItem('refreshToken', loginResponse.tokens.refreshToken);
+          this.dialogRef.close();
+          this.userDataService.user.set(loginResponse.userData);
+          this.userService.getAllUsers();
         },
-        error:(err) => {
-          alert(err.error.message);
-        }
+        error: (err) => {
+          alert(err.message);
+        },
       });
     }
   }
@@ -52,4 +67,5 @@ export class LoginComponent implements OnInit {
     this.dialogRef.close();
     this.dialog.open(CreateAccountComponent);
   }
+
 }

@@ -3,13 +3,13 @@
 </div>
 <div>
   <mat-action-list>
-  @for (user of users; track user) {
-    <button mat-list-item>
-      <img matListItemAvatar src='{{user.profilePic}}'/>
-      <h3 matListItemTitle class='userName'>
-        <span matBadge="10" matBadgeOverlap="false">{{ user.username }}</span></h3>
+  @for (conversation of conversationList(); track conversation) {
+    <button mat-list-item (click)='displayChat(conversation.conversationId)'>
+      <img matListItemAvatar src='{{ getUserById(conversation.membersId[0])?.profilePicUrl }}'/>
+      <h3 matListItemTitle class='chatName'>
+        <span matBadge="10" matBadgeOverlap="false">{{ getUserById(conversation.membersId[0])?.username }}</span></h3>
       <p matListItemLine>
-        @if (user.active) {
+        @if (getUserById(conversation.membersId[0])?.active) {
           <mat-icon style='color: lightgreen'>check_circle</mat-icon>
         } @else {
           <mat-icon style='color: red'>close</mat-icon>
@@ -19,6 +19,7 @@
   }
   </mat-action-list>
 </div>
-<button mat-icon-button class='add-chat' matTooltip='Start new chat' matTooltipPosition="after">
+<button mat-icon-button class='add-chat' matTooltip='Start new chat' matTooltipPosition="after" (click)='openUserList()'>
   <mat-icon>add_circle</mat-icon>
 </button>
+

@@ -13,9 +13,12 @@ mat-dialog-content {
   flex-direction: column;
 }
 
-input-container {
-  display: flex;
-  flex-direction: row;
+.input-container {
+  margin-right: 24px;
 }
 
+mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+}
 

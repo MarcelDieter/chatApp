@@ -7,7 +7,8 @@ namespace chat_app_api
     {
         public AutoMapperProfile()
         {
-            CreateMap<RegisterUser, User>();
+            CreateMap<User, UserData>();
+            CreateMap<UserData, User>();
         }
     }
 }

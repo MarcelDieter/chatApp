@@ -1,37 +1,59 @@
-import { Injectable } from '@angular/core';
-import { User } from '../user';
+import { inject, Injectable, signal } from '@angular/core';
+import { User } from '../models/user';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { FormGroup } from '@angular/forms';
+import { WebsocketService } from './websocket.service';
+import { UserData } from '../models/userdata';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  users: User[] = [
-    {
-      id: 0,
-      username: 'user1',
-      profilePic: '/profilePics/shiba1.jpg',
-      password: '',
-      active: false,
-    },
-    {
-      id: 0,
-      username: 'user2',
-      profilePic: '/profilePics/f0d4011c75b92f165dbab83c8654ebf1.jpg',
-      password: '',
-      active: true,
-    },
-    {
-      id: 0,
-      username: 'user3',
-      profilePic: '/profilePics/cutest-dog-breeds-jpg.jpg',
-      password: '',
-      active: false,
-    },
-  ];
+  createForm?: FormGroup;
+  userList = signal<UserData[]>([]);
 
-  constructor() {}
-
-  getUsers(): User[] {
-    return this.users;
+  private baseUrl = 'https://localhost:7062/api/user';
+  private http = inject(HttpClient);
+  
+  getUsers(): Observable<UserData[]> {
+    return this.http.get<UserData[]>(`${this.baseUrl}/users`);
   }
+
+  getAllUsers() {
+    this.getUsers().subscribe({
+      next: users => {
+        this.userList.set(users);
+      }
+    })
+  }
+
+  updateUserList(obj: any) {
+    let userData = obj.UserData;
+    let newUser: UserData = {
+      userId: userData.UserId,
+      username: userData.Username, 
+      profilePicUrl: userData.ProfilePic, 
+      active: userData.Active};  
+    this.userList.update(userList => [...userList, newUser]);
+  }
+
+  updateUserActivity(obj: any) {
+    this.userList.update(userList => {
+      for (let user of userList) {
+        if (user.userId == obj.UserId) {
+          user.active = obj.Active;
+        }
+      }
+      return userList;
+    });
+
+  }
+ 
+  getUserById(userId: number) {
+    let user = this.userList().find(user => user.userId = userId);
+    return user;
+  }
+
 }

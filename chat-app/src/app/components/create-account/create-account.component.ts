@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -8,8 +8,7 @@ import { FormsModule } from '../../modules/forms.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { AuthService } from '../../services/auth.service';
-import { RegisterForm, LoginForm } from '../../user';
-import { LoggedInService } from '../../services/logged-in.service';
+import { UserDataService } from '../../services/user-data.service';
 
 @Component({
   selector: 'app-create-account',
@@ -27,11 +26,15 @@ import { LoggedInService } from '../../services/logged-in.service';
 export class CreateAccountComponent implements OnInit {
   createForm?: FormGroup;
   selectedFile?: File;
+  usernameErrorMessage = '';
+  createAccountMessage = ''
+  imageDisplayed = 'https://localhost:7062/DefaultProfilePic/shiba1.jpg';
+  accountCreated = false;
 
   private dialogRef = inject(MatDialogRef<LoginComponent>);
+  private dialog = inject(MatDialog);
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
-  private loggedInService = inject(LoggedInService);
 
   ngOnInit(): void {
     this.createForm = this.fb.group({
@@ -45,10 +48,8 @@ export class CreateAccountComponent implements OnInit {
     if (!this.createForm?.valid) {
       return;
     }
-    
-
-    const formData = new FormData();
     const formValues = this.createForm.value;
+    const formData = new FormData();
 
     formData.append('username', formValues.username);
     formData.append('password', formValues.password);
@@ -59,12 +60,16 @@ export class CreateAccountComponent implements OnInit {
     // const data: RegisterForm = this.createForm.value;
     this.authService.signUp(formData).subscribe({
       next: (res) => {
-        alert(res.message);
-        this.loggedInService.loggedIn.set(true);
+        this.usernameErrorMessage = '';
+        this.createAccountMessage = 'Account created successfully!'
+        this.accountCreated = true;
       },
       error: (err) => {
-        alert(err.error.message);
-      },
+          if (err.status == 409) {
+          this.usernameErrorMessage = 'Username ist not available';
+        // alert(err.error.message);
+        }
+      }
     });
   }
 
@@ -80,9 +85,28 @@ export class CreateAccountComponent implements OnInit {
 
     if (input.files && input.files[0]) {
       this.selectedFile = input.files[0];
+      this.previewImage();
       if (this.createForm) {
         this.createForm.patchValue({ profilePic: this.selectedFile });
       }
     }
   }
+
+  previewImage() {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      this.imageDisplayed = <string>reader.result; 
+    }
+    if (this.selectedFile) {
+      reader.readAsDataURL(this.selectedFile);
+    }
+  }
+
+  login() {
+    this.dialogRef.close();
+    this.dialog.open(LoginComponent);
+  }
+
+
 }

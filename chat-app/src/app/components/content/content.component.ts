@@ -1,11 +1,13 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { MaterialModule } from '../../modules/material.module';
 import { FormsModule } from '@angular/forms';
-import { TimeAndDate } from '../../time-and-date';
-import { Message } from '../../message';
-import { MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../login/login.component';
-import { CreateAccountComponent } from '../create-account/create-account.component';
+import { TimeAndDate } from '../../models/time-and-date';
+import { Message } from '../../models/message';
+import { UserDataService } from '../../services/user-data.service';
+import { WebsocketService } from '../../services/websocket.service';
+import { ConversationService } from '../../services/conversation.service';
+import { v4 as uuidv4 } from 'uuid';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-content',
@@ -15,72 +17,69 @@ import { CreateAccountComponent } from '../create-account/create-account.compone
 })
 export class ContentComponent {
   inputMessage = '';
-  messages: Message[] = [
-    new Message(
-      {
-        id: 0,
-        username: 'test user',
-        profilePic: '/profilePics/shiba1.jpg',
-        password: 'admin',
-        active: false,
-      },
-      'test message',
-      new TimeAndDate(new Date())
-    ),
-  ];
+  private websocketService = inject(WebsocketService);
+  private conversationService = inject(ConversationService);
+  private userDataService = inject(UserDataService);
+  private userService = inject(UserService);
+  
+  conversationList = this.conversationService.conversationList;
+  openConversationId = this.conversationService.openConversationId;
+  openConversation = computed(() => this.conversationList().find(conversation => conversation.conversationId == this.openConversationId()));
 
-  timeChanged = false;
 
-  scrollToBottom(id: string) {
-    const element = document.getElementById(id);
+
+  addMessage() {
+    const currentUser = this.userDataService.user();
+    if (!currentUser) {
+      return;
+    }
+  
+    let newMessage: Message = {
+      id: null,
+      content: this.inputMessage,
+      date: new Date(),
+      conversationId: this.openConversation()?.conversationId ?? 0,
+      senderId: currentUser.userId,
+    };
+     
+    // this.conversationService.conversationList.update(conversations => {
+    //   let openConversationId = this.openConversationId();
+    //   if (openConversationId) {
+    //     return conversations
+    //   }
+    //   return conversations.map(conversation => conversation.conversationId == openConversationId ? {...conversation, messages: [...conversation.messages, newMessage]}: conversation);
+    // });
+    this.inputMessage = '';
+    this.websocketService.sendMessage(newMessage);
+  }
+
+  ngAfterViewChecked() {
+    const element = document.getElementById('messageContainer');
     if (element) {
       element.scroll({ top: element.scrollHeight, behavior: 'smooth' });
     }
   }
 
-  addMessage() {
-    if (this.inputMessage.length == 0) {
-      return;
+  getUserById(userId: number) {
+    return this.userService.getUserById(userId);
+  }
+
+  convertDateToString(date: Date) {
+    let newTimeAndDate = new TimeAndDate(date);
+    return newTimeAndDate.getWholeDate();
+  }
+
+  getTime(date: Date) {
+    let minutes = date.getMinutes().toString();
+    let hours = date.getHours().toString();
+    if (minutes.length == 1) {
+      minutes = '0' + minutes;
     }
-    let newMesage: Message = new Message(
-      {
-        id: 0,
-        username: 'test user',
-        profilePic: '/profilePics/shiba1.jpg',
-        password: 'admin',
-        active: false,
-      },
-      this.inputMessage,
-      this.getNewTime()
-    );
-    this.messages.push(newMesage);
-    this.inputMessage = '';
+    return hours + ':' + minutes;
   }
 
-  ngAfterViewChecked() {
-    this.scrollToBottom('messagesContainer');
+  isSameDay(firstDate: Date, secondDate: Date) {
+    return firstDate.getDay() == secondDate.getDay() && firstDate.getMonth() == secondDate.getMonth() && firstDate.getFullYear() == secondDate.getFullYear();
   }
-
-  changeDate() {
-    this.timeChanged = true;
-  }
-
-  getNewTime() {
-    let newTimeAndDate = new TimeAndDate(new Date());      //check to see whether the time separation feature works
-    if (this.timeChanged) {
-      newTimeAndDate.day += 1;
-      this.timeChanged = false;
-    }
-    return newTimeAndDate;
-  }
-
-  ngOnInit() {
-    this.openLogin();
-  }
-  private dialog = inject(MatDialog);
-  
-    openLogin() {
-      this.dialog.open(CreateAccountComponent);
-    };
 
 }

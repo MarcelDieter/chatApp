@@ -2,10 +2,15 @@
 @if (createForm) {
   <form [formGroup]='createForm'>
     <mat-dialog-content>
-      <div>
-        <input type='file' (change)='onFileSelected($event)'>
+      <div class='profilePic'>
+        Your Profile Picture:
+        <img [src]='imageDisplayed' (click)='fileInput.click()'>
+        <input type='file' #fileInput (change)='onFileSelected($event)' style='display: none'>
       </div>
       <div class='input-container'>
+        @if (usernameErrorMessage) {
+          <div class='errorMessage'>{{usernameErrorMessage}}</div>
+        }
         <mat-icon>person</mat-icon>
         <mat-form-field floatLabel='auto'>
           <mat-label>User Name</mat-label>
@@ -21,11 +26,20 @@
           <mat-error>password required</mat-error>
         </mat-form-field>
       </div>
+      @if (accountCreated) {
+        <div class='create-message'>{{createAccountMessage}}</div>
+      }
     </mat-dialog-content>
     <mat-dialog-actions>
-      <button mat-button (click)='createAccount()'>Create Account</button>
-      <button mat-button (click)='cancel()'>Cancel</button>
+      <div class='action-buttons'>
+        @if (!accountCreated) {
+          <button mat-button (click)='createAccount()'>Create Account</button>
+        } 
+        @else {
+          <button mat-button (click)='login()'>LogIn</button>
+        }
+        <button mat-button (click)='cancel()'>Cancel</button>
+      </div>
     </mat-dialog-actions>
-
   </form>
 }

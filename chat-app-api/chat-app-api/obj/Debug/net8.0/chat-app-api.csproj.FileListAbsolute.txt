@@ -172,5 +172,11 @@ C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\obj\Debug\net8
 C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\obj\Debug\net8.0\ref\chat-app-api.dll
 C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\AutoMapper.dll
 C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
-C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\Scrutor.dll
+C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
+C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\chat-app-api.staticwebassets.runtime.json
+C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\Fleck.dll
+C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\P\Projekte\Angular-Projects\chat-app\chat-app-api\chat-app-api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

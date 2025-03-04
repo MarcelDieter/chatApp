@@ -1,0 +1,24 @@
+<div class='dialog'>
+  <div class='heading'>
+    <h3>Select User to start new Chat:</h3>
+  </div>
+  <mat-list>
+    @for (user of users(); track user) {
+      <mat-list-item>
+        <img matListItemAvatar src='{{ user.profilePicUrl }}'>
+        <div class='list-content' matListItemTitle>
+          {{ user.username }}
+          @if (!this.conversationWithUserExists(user.userId)) {
+            <button mat-icon-button (click)='startConversation(user)'>
+              <mat-icon>person_add</mat-icon>
+            </button>
+          }
+      </div>
+      </mat-list-item>
+    }
+  </mat-list>
+  <button mat-icon-button class='create-group' matToolTip='Create group Chat' (click)='createGroupConversation()'> 
+    <mat-icon>groups</mat-icon>
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

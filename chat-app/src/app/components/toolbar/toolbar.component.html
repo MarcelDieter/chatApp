@@ -4,15 +4,16 @@
     <mat-icon class='custom-icon-size'>chat</mat-icon>
   </div>
   <div class='top-right-buttons'>
-    @if (!loggedin()) {
+    @if (!user()) {
       <button mat-icon-button (click)='openLogin()'>
         <mat-icon class='custom-icon-size'>login</mat-icon>
       </button>
-      } @else {
-         <button mat-icon-button (click)='logout()'>
+    } @else {
+        <img [src]='user()?.profilePicUrl' alt='ProfilBild'>
+         <button mat-icon-button (click)='logout(user()?.username)'>
         <mat-icon class='custom-icon-size'>logout</mat-icon>
       </button>
-      }
+    }
       <button  mat-icon-button [matMenuTriggerFor]='menu'>
         <mat-icon class='custom-icon-size'>settings</mat-icon>
       </button>
