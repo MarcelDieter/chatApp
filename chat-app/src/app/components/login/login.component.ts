@@ -5,10 +5,10 @@ import { CreateAccountComponent } from '../create-account/create-account.compone
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { UserDataService } from '../../services/user-data.service';
 import { WebsocketService } from '../../services/websocket.service';
-import { UserService } from '../../services/user.service';
 import { MaterialModule } from '../../modules/material.module';
+import { CurrentUserService } from '../../services/current-user.service';
+import { UserListService } from '../../services/user-list.service';
 
 @Component({
   selector: 'app-login',
@@ -23,17 +23,18 @@ import { MaterialModule } from '../../modules/material.module';
 })
 export class LoginComponent implements OnInit {
   loginForm?: FormGroup;
+  loginSend = false;
 
   private dialog = inject(MatDialog);
   private dialogRef = inject(MatDialogRef<LoginComponent>);
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
-  private userDataService = inject(UserDataService);
-  private userService = inject(UserService);
+  private currentUserService = inject(CurrentUserService);
+  private userListService = inject(UserListService);
   private websocketService = inject(WebsocketService);
 
-  loginSend = false;
-  user = this.userDataService.user;
+  user = this.currentUserService.user;
+  
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -51,9 +52,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('authToken', loginResponse.tokens.accessToken);
           localStorage.setItem('refreshToken', loginResponse.tokens.refreshToken);
           this.dialogRef.close();
-          this.userDataService.user.set(loginResponse.userData);
-          console.log(this.userDataService.user());
-          this.userService.getAllUsers();
+          this.currentUserService.user.set(loginResponse.userData);
+          console.log(this.currentUserService.user());
+          this.userListService.getAllUsers();
           this.loginSend = false;
         },
         error: (err) => {

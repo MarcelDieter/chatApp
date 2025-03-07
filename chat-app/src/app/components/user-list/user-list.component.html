@@ -10,7 +10,7 @@
         <div class='list-content' matListItemTitle>
           {{ user.username }}
           @if (!this.conversationWithUserExists(user.userId)) {
-            <button mat-icon-button (click)='startConversation(user)'>
+            <button mat-icon-button (click)='startConversationWith(user)'>
               <mat-icon>person_add</mat-icon>
             </button>
           }

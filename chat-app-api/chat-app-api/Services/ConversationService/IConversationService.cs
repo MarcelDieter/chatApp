@@ -5,6 +5,6 @@ namespace chat_app_api.Services.ChatService
 {
     public interface IConversationService
     {
-        Task<int?> CreatingConversation(int userId);
+        Task<int> CreatingConversation(int userId);
     }
 }

@@ -1,24 +1,18 @@
 import { HostListener, inject, Injectable } from '@angular/core';
 import { Message } from '../models/message';
-import { UserService } from './user.service';
 import { ConversationService } from './conversation.service';
-import { UserDataService } from './user-data.service';
+import { UserListService } from './user-list.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WebsocketService {
-  ws: WebSocket | null = null;
-  userService = inject(UserService);
-  conversationService = inject(ConversationService);
-  userDataService = inject(UserDataService);
-
+  ws?: WebSocket;
   wsId = uuidv4();
-
-  constructor() { }
-
-
+  
+  private conversationService = inject(ConversationService);
+  private userListService = inject(UserListService);
 
   connect() {
     this.ws = new WebSocket(`ws://localhost:8181?wsId=${this.wsId}`);
@@ -26,20 +20,19 @@ export class WebsocketService {
       const obj = JSON.parse(message.data);
       switch (obj.Type) {
         case 'chatMessage': {
-          this.conversationService.updateMessages(obj);
+          this.conversationService.updateMessages(obj.message);
           break;
         }
         case 'newUser': {
-          this.userService.updateUserList(obj);
-          console.log(obj);
+          this.userListService.addToList(obj);
           break;
         }
         case 'userActivity': {
-          this.userService.updateUserActivity(obj);
-          console.log(obj);
+          this.userListService.updateUserActivity(obj);
           break;
         }
-        default: console.log('error');
+        default: 
+        console.log(`Unknown websocket message received: ${obj}`)
       }
     };
   }
@@ -48,14 +41,13 @@ export class WebsocketService {
     if (!this.ws) {
       return;
     }
-    let jsonObject = JSON.stringify(message);
+    let messageContainer = {
+      type: 'chatMessage',
+      message: message
+    }
+    let jsonObject = JSON.stringify(messageContainer);
     this.ws.send(jsonObject);
   }
-
-  // sendMessage(message: Message) {
-  //   let obj = { type: 'chatMessage', ...message };
-  //   this.sendJsonObject(obj);
-  // }
 
   closeWebSocket() {
     if (!this.ws) {
@@ -70,6 +62,7 @@ export class WebsocketService {
       return;
     }
     this.ws.close();
+    this.connect();
   }
 }
 

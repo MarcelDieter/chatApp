@@ -1,12 +1,12 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
 import { MaterialModule } from '../../modules/material.module';
 import { MatDialog } from '@angular/material/dialog';
 import { UserListComponent } from '../user-list/user-list.component';
 import { Conversation } from '../../models/conversation';
 import { ConversationService } from '../../services/conversation.service';
-import { UserDataService } from '../../services/user-data.service';
+import { CurrentUserService } from '../../services/current-user.service';
+import { UserListService } from '../../services/user-list.service';
+
 @Component({
   selector: 'app-sidebar',
   imports: [MaterialModule],
@@ -14,14 +14,15 @@ import { UserDataService } from '../../services/user-data.service';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent implements OnInit{
-  private userService = inject(UserService);
-  private userDataService = inject(UserDataService);
+  private userListService = inject(UserListService);
+  private currentUserService = inject(CurrentUserService);
   private chatService = inject(ConversationService);
   private dialog = inject(MatDialog);
 
   conversationList = this.chatService.conversationList;
+  
   ngOnInit(): void {
-    this.userService.getAllUsers();
+    this.userListService.getAllUsers();
   }
 
   openUserList() {
@@ -33,11 +34,14 @@ export class SidebarComponent implements OnInit{
   }
 
   getUserById(conversation: Conversation) {
-    let userId = conversation.memberIds.find(id => id != this.userDataService.user()?.userId);
+    let userId = conversation.memberIds.find(id => id != this.currentUserService.user()?.userId);
+    if (conversation.memberIds[0] == conversation.memberIds[1]) {
+      userId = conversation.memberIds[0];
+    }
     if (!userId) {
       return;
     }
-    let user = this.userService.getUserById(userId);
+    let user = this.userListService.getUserById(userId);
     return user;
   }
 }

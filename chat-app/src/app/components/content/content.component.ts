@@ -3,11 +3,10 @@ import { MaterialModule } from '../../modules/material.module';
 import { FormsModule } from '@angular/forms';
 import { TimeAndDate } from '../../models/time-and-date';
 import { Message } from '../../models/message';
-import { UserDataService } from '../../services/user-data.service';
+import { CurrentUserService} from '../../services/current-user.service';
 import { WebsocketService } from '../../services/websocket.service';
 import { ConversationService } from '../../services/conversation.service';
-import { v4 as uuidv4 } from 'uuid';
-import { UserService } from '../../services/user.service';
+import { UserListService } from '../../services/user-list.service';
 
 @Component({
   selector: 'app-content',
@@ -17,23 +16,22 @@ import { UserService } from '../../services/user.service';
 })
 export class ContentComponent {
   inputMessage = '';
+
   private websocketService = inject(WebsocketService);
   private conversationService = inject(ConversationService);
-  private userDataService = inject(UserDataService);
-  private userService = inject(UserService);
-  
+  private currentUserService = inject(CurrentUserService);
+  private userListService = inject(UserListService);
+
   conversationList = this.conversationService.conversationList;
   openConversationId = this.conversationService.openConversationId;
-  openConversation = computed(() => this.conversationList().find(conversation => conversation.conversationId == this.openConversationId()));
-
-
+  openConversation = computed(() =>this.conversationList().find((conversation) => conversation.conversationId == this.openConversationId()));
 
   addMessage() {
-    const currentUser = this.userDataService.user();
+    const currentUser = this.currentUserService.user();
     if (!currentUser) {
       return;
     }
-  
+
     let newMessage: Message = {
       id: null,
       content: this.inputMessage,
@@ -41,14 +39,6 @@ export class ContentComponent {
       conversationId: this.openConversation()?.conversationId ?? 0,
       senderId: currentUser.userId,
     };
-     
-    // this.conversationService.conversationList.update(conversations => {
-    //   let openConversationId = this.openConversationId();
-    //   if (openConversationId) {
-    //     return conversations
-    //   }
-    //   return conversations.map(conversation => conversation.conversationId == openConversationId ? {...conversation, messages: [...conversation.messages, newMessage]}: conversation);
-    // });
     this.inputMessage = '';
     this.websocketService.sendMessage(newMessage);
   }
@@ -61,25 +51,10 @@ export class ContentComponent {
   }
 
   getUserById(userId: number) {
-    return this.userService.getUserById(userId);
+    return this.userListService.getUserById(userId);
   }
 
-  convertDateToString(date: Date) {
-    let newTimeAndDate = new TimeAndDate(date);
-    return newTimeAndDate.getWholeDate();
+  createNewDate(date: Date) {
+    return new TimeAndDate(date);
   }
-
-  getTime(date: Date) {
-    let minutes = date.getMinutes().toString();
-    let hours = date.getHours().toString();
-    if (minutes.length == 1) {
-      minutes = '0' + minutes;
-    }
-    return hours + ':' + minutes;
-  }
-
-  isSameDay(firstDate: Date, secondDate: Date) {
-    return firstDate.getDay() == secondDate.getDay() && firstDate.getMonth() == secondDate.getMonth() && firstDate.getFullYear() == secondDate.getFullYear();
-  }
-
 }

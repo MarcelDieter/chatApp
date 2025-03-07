@@ -2,8 +2,8 @@ import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { ContentComponent } from './components/content/content.component';
-import { UserService } from './services/user.service';
-import { UserDataService } from './services/user-data.service';
+import { UserService } from './services/user-list.service';
+import { UserDataService } from './services/current-user.service';
 import { StartPageComponent } from './components/start-page/start-page.component';
 import { WebsocketService } from './services/websocket.service';
 

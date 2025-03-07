@@ -1,7 +1,17 @@
-export interface User {
-  id: number;
+export interface UserData {
+  userId: number;
+  username: string;
+  profilePicUrl: string;
+  active: boolean;
+}
+
+export interface RegisterUser {
   username: string;
   password: string;
-  profilePic: string;
-  active: boolean;
+  profilePic: File;
+}
+
+export interface LoginUser {
+  username: string;
+  password: string;
 }

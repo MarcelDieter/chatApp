@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace chat_app_api.Models
 {
@@ -9,8 +10,10 @@ namespace chat_app_api.Models
         public string? Content { get; set; }
         public DateTime Date { get; set; }
         public int ConversationId { get; set; }
-        public required Conversation Conversation { get; set; }
+        [JsonIgnore]
+        public Conversation? Conversation { get; set; }
         public int SenderId { get; set; }
-        public required User Sender { get; set; }
+        [JsonIgnore]
+        public User? Sender { get; set; }
     }
 }

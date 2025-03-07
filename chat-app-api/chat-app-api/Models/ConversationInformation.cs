@@ -3,6 +3,6 @@
     public class ConversationInformation
     {
         public int Id { get; set; }
-        public required int[] MemberIds { get; set; }
+        public required List<int> MemberIds { get; set; }
     }
 }

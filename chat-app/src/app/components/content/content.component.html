@@ -1,12 +1,13 @@
 @let openConversation = this.openConversation();
 @if (openConversation) {
   <div class='form-and-message-container'>
-    <div id='messagesContainer'>
-      @for (message of openConversation.messages; track message; let i = $index) {
-        @if (i == 0 || !this.isSameDay(message.date, openConversation.messages[i - 1].date)) {
+    <div id='messageContainer'>
+      @for (message of openConversation.messages; track message.id; let i = $index) {
+        @let date = createNewDate(message.date);
+        @if (i == 0 || !date.isSameDayAs(openConversation.messages[i - 1].date)) {
           <div class='date'>
             <mat-divider></mat-divider>
-            <p>{{ this.convertDateToString(message.date)}}</p>
+            <p>{{ date.turnDateToString()}}</p>
             <mat-divider></mat-divider>
           </div>
         }
@@ -15,7 +16,7 @@
             <mat-card-header>
               <img mat-card-avatar src='{{ getUserById(message.senderId)?.profilePicUrl }}'>
               <mat-card-title>{{ getUserById(message.senderId)?.username }}</mat-card-title>
-              <mat-card-subtitle>{{ this.getTime(message.date) }}</mat-card-subtitle>
+              <mat-card-subtitle>{{ date.time }}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-content>
               <p>{{ message.content }}</p>
@@ -24,8 +25,6 @@
         </div>  
       }
     </div>
-      
-      
     <div class='form-container'>
       <mat-form-field class='inputField' appearance="fill">
         <input [(ngModel)]='inputMessage' matInput (keydown.enter)="addMessage()">

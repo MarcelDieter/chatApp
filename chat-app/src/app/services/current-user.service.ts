@@ -1,13 +1,10 @@
 import { Injectable, signal } from '@angular/core';
-import { UserData } from '../models/userdata';
-
+import { UserData } from '../models/user';
 @Injectable({
   providedIn: 'root'
 })
-export class UserDataService {
+export class CurrentUserService {
   user = signal<UserData | null>(null);
-
-  constructor() { }
 
   clearStorage() {
     localStorage.removeItem('authToken');

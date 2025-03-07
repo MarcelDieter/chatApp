@@ -1,18 +1,15 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { inject, Injectable, Injector } from '@angular/core';
-import { Observable, catchError, of, switchMap, throwError } from 'rxjs';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { inject, Injectable} from '@angular/core';
+import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
-import { UserDataService } from './user-data.service';
 import { TokenResponse } from '../models/token-response';
 
 @Injectable()  
 export class AuthInterceptor implements HttpInterceptor {
   private authService = inject(AuthService);
-  private userDataService = inject(UserDataService);
   
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('authToken');
-    
     if (token) {
       req = this.addTokenHeader(req, token);
     }

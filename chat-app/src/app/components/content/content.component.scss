@@ -6,12 +6,6 @@
   height: calc(100vh - 80px);
 }
 
-.form-container {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-
-}
 
 .form-and-message-container {
   display: flex;
@@ -21,44 +15,77 @@
   bottom: 20px;
   justify-content: center;
   align-items: center;
-  // background-color: green;
-  width: 800px;
+  width: 100%;
+  max-width: 800px;
   margin-left: auto;
   margin-right: auto;
   right: 0;
+  
+  .form-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 600px;
+    min-width: 300px;
+    
+    .inputField {
+      width: 70%;
+    }
+  
+    button {
+      color: rgb(255, 255, 255);
+    }
+  
+    .large-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 40px;
+   
+      :hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  #messageContainer {
+    width: 100%;
+    max-width: 1000px;
+    max-height: 660px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    
+    .message {
+      margin: 10px;
+      background-color: rgb(55, 55, 61);
+      border-radius: 20px;
+      overflow-wrap: break-word;
+    }
+    
+    .date {
+      display: flex;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      align-items: center;
+      height: 40px;
+      background-color: #1e0120;
+      z-index: 99;
+      
+      p {
+        margin: 0 10px 0 10px;
+      }
+    }
+  }
 }
 
-.inputField {
-  width: 600px;
-}
-
-button {
-  color: rgb(255, 255, 255);
-}
-
-.large-icon {
-  width: 40px;
-  height: 40px;
-  font-size: 40px;
-}
-
-.larger-icon:hover {
-  cursor: pointer;
-}
-
-#messagesContainer {
-  width: 1000px;
-  max-height: 680px;
-  overflow-y: auto;
+.text {
   display: flex;
-  flex-direction: column;
-}
-
-.message {
-  margin: 10px;
-  background-color: rgb(55, 55, 61);
-  border-radius: 20px;
-  overflow-wrap: break-word;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 80px);
+  font-size: 2rem;
 }
 
 mat-card-subtitle {
@@ -72,31 +99,6 @@ mat-card {
 mat-divider {
   border-top-width: 2px;
   border-top-color: rgb(255, 255, 255);
-}
-
-.date {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-}
-
-.date p {
-  margin: 0 10px 0 10px;
-}
-
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #2c1c06;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgb(55, 55, 61);
-  border-radius: 100vw;
 }
 
 mat-card-header {
@@ -117,11 +119,17 @@ mat-divider {
   flex-grow: 1;
 }
 
-
-.text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100% - 80px);
-  font-size: 2rem;
+::-webkit-scrollbar {
+  width: 10px;
 }
+
+::-webkit-scrollbar-track {
+  background-color: #2c1c06;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(55, 55, 61);
+  border-radius: 100vw;
+}
+
+

@@ -4,20 +4,6 @@
   color: rgb(71, 63, 52);
 }
 
-mat-list {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-mat-list-item {
-  background-color: rgb(255, 255, 255);
-  border-radius: 1rem;
-  margin: 1rem 0.5rem 0rem 0.5rem;
-  width: 13rem;
-}
-
 .dialog {
   background-color: rgb(172, 164, 164);
   height: 40rem;
@@ -44,3 +30,19 @@ mat-list-item {
   display: flex;
   justify-content: center;
 }
+
+mat-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-list-item {
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  margin: 1rem 0.5rem 0rem 0.5rem;
+  width: 13rem;
+}
+
+

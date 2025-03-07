@@ -1,13 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { SidebarComponent } from '../sidebar/sidebar.component';
-import { UserService } from '../../services/user.service';
 import { ConversationService } from '../../services/conversation.service';
-import { Conversation } from '../../models/conversation';
-import { UserData } from '../../models/userdata';
 import { MaterialModule } from '../../modules/material.module';
-import { UserDataService } from '../../services/user-data.service';
-
+import { CurrentUserService } from '../../services/current-user.service';
+import { UserListService } from '../../services/user-list.service';
+import { UserData } from '../../models/user';
 
 @Component({
   selector: 'app-user-list',
@@ -16,43 +12,19 @@ import { UserDataService } from '../../services/user-data.service';
   styleUrl: './user-list.component.scss'
 })
 export class UserListComponent {
-  private userService = inject(UserService);
-  private conversationService = inject(ConversationService);
-  private userDataService = inject(UserDataService);
-  users = this.userService.userList;
   createGroupToggle = false;
 
-  private dialogRef = inject(MatDialogRef<SidebarComponent>);
+  private conversationService = inject(ConversationService);
+  private userListService = inject(UserListService);
+  
+  users = this.userListService.users;
 
-  startConversation(user: UserData) {
-    let ownUserId = this.userDataService.user()?.userId;
-    if (!ownUserId) {
-      return;
-    }
-    this.conversationService.createConversationWith(user.userId).subscribe({
-      next: conversationId => {
-        if (conversationId) {
-          let newConversation: Conversation = {
-            conversationId: conversationId, 
-            messages: [],
-            profilePicUrl: user.profilePicUrl,
-            memberIds: [ownUserId, user.userId]
-            };
-            this.conversationService.addConversation(newConversation);
-        }
-      },
-      error: err => {
-        console.log(err);
-      }
-    });
+  startConversationWith(user: UserData) {
+    this.conversationService.startConversationWith(user);
   }
 
   conversationWithUserExists(userId: number) {
-    return this.conversationService.conversationList().some(conversation => {
-      let isIncluded = conversation.memberIds.includes(userId);
-      let lenght = conversation.memberIds.length;
-      return isIncluded && lenght == 2;
-    });
+   return this.conversationService.conversationWithUserExsits(userId);
   }
 
   createGroupConversation() {

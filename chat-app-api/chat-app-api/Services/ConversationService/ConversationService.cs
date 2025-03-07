@@ -21,38 +21,42 @@ namespace chat_app_api.Services.NewFolder
             _websocketService = webSocketService;
         }
 
-        public async Task<int?> CreatingConversation(int user2Id)
+        public async Task<int> CreatingConversation(int user2Id)
         {
-            var first = _httpContextAccessor.HttpContext;
-            var second = first.User;
             int user1Id = int.Parse(_httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var conversationId = RetrieveConversationId(user1Id, user2Id);
+            List<int> userIds = user1Id == user2Id ? new List<int> { user1Id} : new List<int> { user1Id, user2Id };
+            int conversationId = RetrieveConversationId(userIds);
             if (conversationId == 0)
             {
-                var newConversation = new Conversation {};  
-                _dbContext.Conversations.Add(newConversation);
-                await _dbContext.SaveChangesAsync();
-                _dbContext.UserConversations.Add(new UserConversation { UserId = user1Id, ConversationId = newConversation.Id });
-                _dbContext.UserConversations.Add(new UserConversation { UserId = user2Id, ConversationId = newConversation.Id });
-                await _dbContext.SaveChangesAsync();
-                conversationId = newConversation.Id;
-                _websocketService.StartConversation(new ConversationInformation { Id = newConversation.Id, MemberIds = [user1Id, user2Id] });
+                conversationId = await CreateConversation(userIds);
             }
+            _websocketService.StartConversation(new ConversationInformation { Id = conversationId, MemberIds = userIds });
             return conversationId;
         }
 
-        private int? RetrieveConversationId(int user1Id, int user2Id)
+        private int RetrieveConversationId(List<int> userIds)
         {
             var conversationId = _dbContext.UserConversations
-                .Where(uc => uc.UserId == user1Id || uc.UserId == user2Id)
+                .Where(uc => userIds.Contains(uc.UserId))
                 .GroupBy(uc => uc.ConversationId)
-                .Where(g => g.Any(uc => uc.UserId == user1Id) && g.Any(uc => uc.UserId == user2Id))
+                .Where(g => g.Count() == userIds.Count && g.All(uc => userIds.Contains(uc.UserId)))
                 .Select(g => g.Key)
                 .FirstOrDefault();
             return conversationId;
         }
 
+        private async Task<int> CreateConversation(List<int> userIds)
+        {
+            var newConversation = new Conversation { };
+            _dbContext.Conversations.Add(newConversation);
+            await _dbContext.SaveChangesAsync();
 
-
+            foreach (var userId in userIds)
+            {
+                _dbContext.UserConversations.Add(new UserConversation { UserId = userId, ConversationId = newConversation.Id });
+            }
+            await _dbContext.SaveChangesAsync();
+            return newConversation.Id;
+        }
     }
 }

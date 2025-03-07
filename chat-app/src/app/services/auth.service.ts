@@ -1,23 +1,22 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { LoginUser } from '../models/login-user';
+import { LoginUser, UserData } from '../models/user';
 import { Observable } from 'rxjs';
 import { TokenResponse } from '../models/token-response';
 import { LoginResponse } from '../models/login-response';
-import { UserDataService } from './user-data.service';
-import { UserData } from '../models/userdata';
+import { CurrentUserService } from './current-user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  baseUrl = 'https://localhost:7062/api/auth';
   loggedIn = signal(false);
-  private baseUrl = 'https://localhost:7062/api/auth';
-  private http = inject(HttpClient);
-  private userDataService = inject(UserDataService);
 
-  signUp(userObj: FormData) {
+  private http = inject(HttpClient);
+  private currentUserService = inject(CurrentUserService);
+
+  register(userObj: FormData) {
     return this.http.post<any>(`${this.baseUrl}/register`, userObj);
   }
   
@@ -30,7 +29,7 @@ export class AuthService {
   }
 
   refreshTokens(): Observable<TokenResponse> {
-    let id = this.userDataService.user()?.userId;
+    let id = this.currentUserService.user()?.userId;
     let refreshToken = localStorage.getItem('refreshToken');
     return this.http.post<TokenResponse>(`${this.baseUrl}/refresh-tokens`, {id: id, refreshToken: refreshToken});
   }
@@ -42,9 +41,4 @@ export class AuthService {
   getUser(): Observable<UserData> {
     return this.http.get<UserData>(`${this.baseUrl}/user`);
   }
-
-  test() {
-    return this.http.get(`${this.baseUrl}/test`);
-  }
-
 }

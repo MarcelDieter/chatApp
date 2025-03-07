@@ -1,15 +1,9 @@
 ﻿using chat_app_api.Models;
 using Fleck;
-using Newtonsoft.Json;
-using System.Net.Sockets;
-using Microsoft.AspNetCore.Http;
 using System.Web;
-using System.Collections.Generic;
-using chat_app_api.Services.NewFolder;
-using Newtonsoft.Json.Linq;
-using chat_app_api.Services.ChatService;
 using chat_app_api.Services.MessageService;
-using Microsoft.Extensions.DependencyInjection;
+using System.Text.Json;
+using chat_app_api.Helpers;
 
 namespace chat_app_api.Services.WebSocketService
 {
@@ -48,8 +42,12 @@ namespace chat_app_api.Services.WebSocketService
 
                socket.OnMessage = async message =>
                 {
-                    var mess = message;
-                    Message messageObject = JsonConvert.DeserializeObject<Message>(message);
+                    var serializeOptions = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    WebsocketMessage wsMessage = JsonSerializer.Deserialize<WebsocketMessage>(message, serializeOptions);
+                    Message messageObject = wsMessage.Message;
                     using (IServiceScope scope = _serviceScopeFactory.CreateScope())
                     {
                     var messageService = scope.ServiceProvider.GetRequiredService<IMessageService>();
@@ -83,13 +81,20 @@ namespace chat_app_api.Services.WebSocketService
         {
             var conversationConnections = _wsConversationConnections.Where(kvp => kvp.Key == message.ConversationId).FirstOrDefault();
             var senderConnection = _wsLoggedInConnections.Where(kvp => kvp.Key == message.SenderId).FirstOrDefault();
-            var jsonMessage = JsonConvert.SerializeObject(message);
+            WebsocketMessage newWsMessage = new WebsocketMessage
+            {
+                Type = "chatMessage",
+                Message = message
+            };
+            var serializeOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true,
+            };
+            var jsonMessage = JsonSerializer.Serialize(newWsMessage, serializeOptions);
             foreach (var connection in conversationConnections.Value)
             {
-                if (connection != senderConnection.Value)
-                {
-                    connection.Send(jsonMessage);
-                }
+                connection.Send(jsonMessage);
             }
         }
 
@@ -131,7 +136,12 @@ namespace chat_app_api.Services.WebSocketService
                 Type = "newUser",
                 UserData = user
             };
-            string jsonString = JsonConvert.SerializeObject(newUserMessage);
+            var serializeOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true,
+            };
+            string jsonString = JsonSerializer.Serialize(newUserMessage, serializeOptions);
             SendMessageToAll(jsonString);
         }
 
@@ -143,12 +153,21 @@ namespace chat_app_api.Services.WebSocketService
                 UserId = userId,
                 Active = loggedIn
             };
-            string jsonString = JsonConvert.SerializeObject(newActiveStatusMessage);
+            var serializeOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true,
+            };
+            string jsonString = JsonSerializer.Serialize(newActiveStatusMessage, serializeOptions);
             SendMessageToAll(jsonString);
         }
 
         public void StartConversation(ConversationInformation conInfo)
         {
+            if (_wsConversationConnections.ContainsKey(conInfo.Id))
+            {
+                return;
+            }
             List<IWebSocketConnection> connections = new List<IWebSocketConnection>();
             foreach (var memberId in conInfo.MemberIds)
             {
