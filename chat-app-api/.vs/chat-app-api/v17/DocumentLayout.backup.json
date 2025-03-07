@@ -7,8 +7,32 @@
       "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\services\\websocketservice\\websocketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\services\\conversationservice\\conversationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\services\\conversationservice\\conversationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\services\\authservice\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\services\\authservice\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\models\\websocketmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\models\\websocketmessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\services\\messageservice\\messageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,28 +43,8 @@
       "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\helpers\\uppercasenamingpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\helpers\\uppercasenamingpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\services\\userservice\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\services\\userservice\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\controllers\\conversationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|c:\\p\\projekte\\angular-projects\\chat-app\\chat-app-api\\chat-app-api\\services\\conversationservice\\conversationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8EFE8305-1B9D-40A6-B4EA-79BB6B54DD8A}|chat-app-api\\chat-app-api.csproj|solutionrelative:chat-app-api\\services\\conversationservice\\conversationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,24 +54,48 @@
       "DocumentGroups": [
         {
           "DockedWidth": 252,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Services\\AuthService\\AuthService.cs",
+              "RelativeDocumentMoniker": "chat-app-api\\Services\\AuthService\\AuthService.cs",
+              "ToolTip": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Services\\AuthService\\AuthService.cs",
+              "RelativeToolTip": "chat-app-api\\Services\\AuthService\\AuthService.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwCYAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T10:51:02.15Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WebsocketMessage.cs",
+              "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Models\\WebsocketMessage.cs",
+              "RelativeDocumentMoniker": "chat-app-api\\Models\\WebsocketMessage.cs",
+              "ToolTip": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Models\\WebsocketMessage.cs",
+              "RelativeToolTip": "chat-app-api\\Models\\WebsocketMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-07T08:01:35.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "chat-app-api\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Controllers\\AuthController.cs",
               "RelativeToolTip": "chat-app-api\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAnwDYAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T13:23:00.589Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-06T13:23:00.589Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "MessageService.cs",
               "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Services\\MessageService\\MessageService.cs",
               "RelativeDocumentMoniker": "chat-app-api\\Services\\MessageService\\MessageService.cs",
@@ -75,20 +103,7 @@
               "RelativeToolTip": "chat-app-api\\Services\\MessageService\\MessageService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T12:49:31.43Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UppercaseNamingPolicy.cs",
-              "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Helpers\\UppercaseNamingPolicy.cs",
-              "RelativeDocumentMoniker": "chat-app-api\\Helpers\\UppercaseNamingPolicy.cs",
-              "ToolTip": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Helpers\\UppercaseNamingPolicy.cs",
-              "RelativeToolTip": "chat-app-api\\Helpers\\UppercaseNamingPolicy.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T12:37:52.104Z"
+              "WhenOpened": "2025-03-06T12:49:31.43Z"
             },
             {
               "$type": "Document",
@@ -98,14 +113,14 @@
               "RelativeDocumentMoniker": "chat-app-api\\Services\\WebSocketService\\WebSocketService.cs",
               "ToolTip": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Services\\WebSocketService\\WebSocketService.cs",
               "RelativeToolTip": "chat-app-api\\Services\\WebSocketService\\WebSocketService.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAMwEsAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAMwEoAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-06T12:16:31.514Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "Conversation.cs",
               "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Models\\Conversation.cs",
               "RelativeDocumentMoniker": "chat-app-api\\Models\\Conversation.cs",
@@ -117,19 +132,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 1,
               "Title": "ConversationService.cs",
               "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Services\\ConversationService\\ConversationService.cs",
               "RelativeDocumentMoniker": "chat-app-api\\Services\\ConversationService\\ConversationService.cs",
               "ToolTip": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Services\\ConversationService\\ConversationService.cs",
               "RelativeToolTip": "chat-app-api\\Services\\ConversationService\\ConversationService.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBcAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABcAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-06T12:07:49.586Z"
+              "WhenOpened": "2025-03-06T12:07:49.586Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
               "Title": "ConversationController.cs",
               "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Controllers\\ConversationController.cs",
               "RelativeDocumentMoniker": "chat-app-api\\Controllers\\ConversationController.cs",
@@ -141,7 +157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Services\\UserService\\UserService.cs",
               "RelativeDocumentMoniker": "chat-app-api\\Services\\UserService\\UserService.cs",
@@ -153,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Program.cs",
               "RelativeDocumentMoniker": "chat-app-api\\Program.cs",
@@ -171,7 +187,7 @@
               "RelativeDocumentMoniker": "chat-app-api\\Controllers\\UserController.cs",
               "ToolTip": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\Controllers\\UserController.cs",
               "RelativeToolTip": "chat-app-api\\Controllers\\UserController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-04T12:38:04.635Z"
             }

@@ -26,11 +26,11 @@
       }
     </div>
     <div class='form-container'>
-      <mat-form-field class='inputField' appearance="fill">
-        <input [(ngModel)]='inputMessage' matInput (keydown.enter)="addMessage()">
-      </mat-form-field>
+      <!-- <form class='inputField' appearance="fill"> -->
+        <input class='inputField' [(ngModel)]='inputMessage' (keydown.enter)="addMessage()">
+      <!-- </form> -->
       <button mat-icon-button (click)='addMessage()'>
-        <mat-icon class='large-icon'>arrow_circle_right</mat-icon>
+        <mat-icon class='large-icon'>send</mat-icon>
       </button>
     </div>
   </div>

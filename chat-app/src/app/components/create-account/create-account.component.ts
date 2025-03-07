@@ -4,10 +4,11 @@ import { LoginComponent } from '../login/login.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { MaterialModule } from '../../modules/material.module';
+import { FormsModule } from '../../modules/forms.module';
 
 @Component({
   selector: 'app-create-account',
-  imports: [MaterialModule],
+  imports: [MaterialModule, FormsModule],
   templateUrl: './create-account.component.html',
   styleUrl: './create-account.component.scss',
 })

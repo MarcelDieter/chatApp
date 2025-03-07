@@ -4,7 +4,7 @@
     <h3>Select User to start new Chat:</h3>
   </div>
   <mat-list>
-    @for (user of users(); track user) {
+    @for (user of users(); track user.userId) {
       <mat-list-item>
         <img matListItemAvatar src='{{ user.profilePicUrl }}'>
         <div class='list-content' matListItemTitle>

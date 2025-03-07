@@ -3,7 +3,6 @@ using Fleck;
 using System.Web;
 using chat_app_api.Services.MessageService;
 using System.Text.Json;
-using chat_app_api.Helpers;
 
 namespace chat_app_api.Services.WebSocketService
 {

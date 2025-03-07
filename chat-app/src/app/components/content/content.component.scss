@@ -4,54 +4,27 @@
   background-color: #1e0120;
   color: white;
   height: calc(100vh - 80px);
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 
 .form-and-message-container {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  left: 330px;
-  position: absolute;
-  bottom: 20px;
   justify-content: center;
+  gap: 20px;
   align-items: center;
   width: 100%;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  right: 0;
+  bottom: 30px;
   
-  .form-container {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    max-width: 600px;
-    min-width: 300px;
-    
-    .inputField {
-      width: 70%;
-    }
   
-    button {
-      color: rgb(255, 255, 255);
-    }
-  
-    .large-icon {
-      width: 40px;
-      height: 40px;
-      font-size: 40px;
-   
-      :hover {
-        cursor: pointer;
-      }
-    }
-  }
-
   #messageContainer {
     width: 100%;
-    max-width: 1000px;
-    max-height: 660px;
+    max-height: 760px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -59,7 +32,7 @@
     .message {
       margin: 10px;
       background-color: rgb(55, 55, 61);
-      border-radius: 20px;
+      border-radius: 30px;
       overflow-wrap: break-word;
     }
     
@@ -69,12 +42,51 @@
       position: sticky;
       top: 0;
       align-items: center;
-      height: 40px;
       background-color: #1e0120;
       z-index: 99;
       
       p {
         margin: 0 10px 0 10px;
+      }
+    }
+  }
+  
+  .form-container {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 800px;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    
+    .inputField {
+      flex-grow: 1;
+      max-width: 500px;
+      height: 40px;
+      font-size: 15px;
+      border-radius: 10px;
+      background-color:  rgb(55, 55, 61);
+      color: whitesmoke;
+      border: 0;
+    }
+  
+    button {
+      color: rgb(77, 74, 74);
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .large-icon {
+      width: 30px;
+      height: 30px;
+      font-size: 30px;
+   
+      :hover {
+        cursor: pointer;
       }
     }
   }

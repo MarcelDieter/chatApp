@@ -9,18 +9,19 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class WebsocketService {
   ws?: WebSocket;
-  wsId = uuidv4();
+  wsId?: string;
   
   private conversationService = inject(ConversationService);
   private userListService = inject(UserListService);
-
+  
   connect() {
+    this.wsId = uuidv4();
     this.ws = new WebSocket(`ws://localhost:8181?wsId=${this.wsId}`);
     this.ws.onmessage = (message) => {
       const obj = JSON.parse(message.data);
-      switch (obj.Type) {
+      switch (obj.type) {
         case 'chatMessage': {
-          this.conversationService.updateMessages(obj.message);
+          this.conversationService.updateMessages(obj);
           break;
         }
         case 'newUser': {

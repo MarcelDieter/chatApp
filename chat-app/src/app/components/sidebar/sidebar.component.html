@@ -3,7 +3,7 @@
 </div>
 <div>
   <mat-action-list>
-  @for (conversation of conversationList(); track conversation) {
+  @for (conversation of conversationList(); track conversation.conversationId) {
     @let user = getUserById(conversation);
     <button mat-list-item (click)='displayChat(conversation.conversationId)'>
       <img matListItemAvatar src='{{ user?.profilePicUrl }}'/>

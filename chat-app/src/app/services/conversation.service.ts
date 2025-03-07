@@ -13,7 +13,7 @@ import { UserData } from '../models/user';
 })
 export class ConversationService {
   baseUrl = 'https://localhost:7062/api/conversation';
-  conversationList = signal<Conversation[]>([]);
+  conversationList = signal<Conversation[]>([]);                  //here goes a computed signals that holds the conversation based on the current user Signal
   openConversationId = signal<number | null>(null);
 
   private http = inject(HttpClient);
