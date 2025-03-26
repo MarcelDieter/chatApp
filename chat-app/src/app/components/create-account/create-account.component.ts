@@ -17,7 +17,7 @@ export class CreateAccountComponent implements OnInit {
   selectedFile?: File;
   usernameErrorMessage = '';
   createAccountMessage = ''
-  imageDisplayed = 'https://localhost:7062/DefaultProfilePic/shiba1.jpg';
+  imageDisplayed = '';
   accountCreated = false;
 
   private dialogRef = inject(MatDialogRef<LoginComponent>);
@@ -30,6 +30,14 @@ export class CreateAccountComponent implements OnInit {
       username: ['', Validators.required],
       password: ['', Validators.required],
       profilePic: [null],
+    });
+    this.authService.getDefaultProfilePic().subscribe({
+      next: res => {
+        this.imageDisplayed = res.url
+      },
+      error: err=> {
+        console.log(err);
+      } 
     });
   }
 

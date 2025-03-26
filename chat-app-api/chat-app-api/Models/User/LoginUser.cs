@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace chat_app_api.Models
+namespace chat_app_api.Models.User
 {
     public class LoginUser
     {

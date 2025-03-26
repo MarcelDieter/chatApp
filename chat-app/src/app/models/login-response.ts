@@ -1,7 +1,7 @@
 import { TokenResponse } from './token-response';
-import { UserData } from './user';
+import { UserDTO } from './user';
 
 export interface LoginResponse {
-  userData: UserData,
+  userDTO: UserDTO,
   tokens: TokenResponse;
 }

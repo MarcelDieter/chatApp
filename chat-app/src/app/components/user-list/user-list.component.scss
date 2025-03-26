@@ -1,48 +1,165 @@
-.heading {
-  display: flex;
-  justify-self: center;
-  color: rgb(71, 63, 52);
-}
-
 .dialog {
-  background-color: rgb(172, 164, 164);
+  position: relative;
+  background-color: rgb(100, 99, 99);
   height: 40rem;
   width: 20rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2.5rem;
-}
+  transition: width .6s ease-out;
+  
+  &.expand-dialog {
+    width: 37.5rem ;
+  }
+  
+  h3 {
+    color: rgb(207, 162, 98);
 
-.list-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1rem;
+    &.fade-in-heading {
+      animation: fade 1s ease-in-out;
+    }
+    
+    @keyframes fade {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+  
+  .content {
+    position: absolute;
+    right: 3.5rem;
+    top: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4rem;
 
-  button {
-    color: rgb(77, 228, 77);
+    .hidden {
+      display: none;
+    }
+    
+    .create-group-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: fade-in .3s linear;
+    }
+    
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
+    .group-settings {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4rem;
+      color: whitesmoke;
+    
+      * {
+        margin: 0;
+      }
+    
+      .username-selection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    
+    
+      input {
+        color: white;
+        background-color: rgb(100, 99, 99);
+        border: none;
+        border-bottom: 1px solid white;
+        
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .members {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .5rem;
+      }
+
+      .drop-box {
+        min-height: 10rem;
+        width: 14rem;
+        border: 3px dashed rgb(255, 255, 255);
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: .3rem;
+
+        p {
+          text-align: center;
+        }
+      }
+    }
+
+    .user-list-and-toggle-button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      .user-cards-list {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin-bottom: 2rem;
+        gap: 1rem;
+      }
+
+      .create-group-button {
+        width: 6rem;
+        display: flex;
+        justify-content: center;
+      }
+    }
   }
 }
 
-.create-group {
-  width: 6rem;
+.user-card {
   display: flex;
-  justify-content: center;
-}
-
-mat-list {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-}
-
-mat-list-item {
-  background-color: rgb(255, 255, 255);
+  justify-content: space-between;
+  background-color: rgb(223, 233, 233);
   border-radius: 1rem;
-  margin: 1rem 0.5rem 0rem 0.5rem;
   width: 13rem;
+  height: 3rem;
+  padding: 0 .5rem;
+
+  .username-and-profile-picture {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .profile-picture {
+    border-radius: 100vw;
+    width: 40px;
+    height: 40px;
+  }
+
+  .username {
+    font-size: 1rem;
+  }
+
+  .add-user-button {
+    button {
+      color: rgb(77, 228, 77);
+    }
+  }
 }
-
-

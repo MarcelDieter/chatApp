@@ -1,28 +1,28 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/chat-app-api/DefaultProfilePic/shiba1.jpg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DefaultProfilePic\shiba1.jpg'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/chat-app-api/DefaultProfilePic/test.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DefaultProfilePic\test.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/chat-app-api/DefaultProfilePic/shiba1.qcve5yby9m.jpg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DefaultProfilePic\shiba1.jpg'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/chat-app-api/DefaultProfilePic/test.qcve5yby9m.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DefaultProfilePic\test.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qcve5yby9m"},{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="},{"Name":"label","Value":"_content/chat-app-api/DefaultProfilePic/shiba1.jpg"}]]]></EndpointProperties>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qcve5yby9m"},{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="},{"Name":"label","Value":"_content/chat-app-api/DefaultProfilePic/test.jpg"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/1_profilePic.j6gbpsyklv.jpg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\1_profilePic.jpg'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"j6gbpsyklv"},{"Name":"integrity","Value":"sha256-q\u002B9AwICk//htC0\u002BgYrHSNTBQSXaWdKxv96oEagj3L/o="},{"Name":"label","Value":"_content/chat-app-api/ProfilePics/1_profilePic.jpg"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"59209"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022q\u002B9AwICk//htC0\u002BgYrHSNTBQSXaWdKxv96oEagj3L/o=\u0022"},{"Name":"Last-Modified","Value":"Tue, 04 Mar 2025 10:36:43 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/1_profilePic.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\1_profilePic.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-q\u002B9AwICk//htC0\u002BgYrHSNTBQSXaWdKxv96oEagj3L/o="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"59209"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022q\u002B9AwICk//htC0\u002BgYrHSNTBQSXaWdKxv96oEagj3L/o=\u0022"},{"Name":"Last-Modified","Value":"Tue, 04 Mar 2025 10:36:43 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/1_profilePic.qcve5yby9m.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\1_profilePic.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qcve5yby9m"},{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="},{"Name":"label","Value":"_content/chat-app-api/ProfilePics/1_profilePic.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/2_profilePic.jpg">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\2_profilePic.jpg'))</AssetFile>
@@ -36,16 +36,40 @@
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qcve5yby9m"},{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="},{"Name":"label","Value":"_content/chat-app-api/ProfilePics/2_profilePic.jpg"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/test_profilePic.jpg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\test_profilePic.jpg'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/3_profilePic.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\3_profilePic.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/test_profilePic.qcve5yby9m.jpg">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\test_profilePic.jpg'))</AssetFile>
+    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/3_profilePic.qcve5yby9m.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\3_profilePic.jpg'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qcve5yby9m"},{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="},{"Name":"label","Value":"_content/chat-app-api/ProfilePics/test_profilePic.jpg"}]]]></EndpointProperties>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qcve5yby9m"},{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="},{"Name":"label","Value":"_content/chat-app-api/ProfilePics/3_profilePic.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/4_profilePic.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\4_profilePic.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/4_profilePic.qcve5yby9m.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\4_profilePic.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qcve5yby9m"},{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="},{"Name":"label","Value":"_content/chat-app-api/ProfilePics/4_profilePic.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/8_profilePic.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\8_profilePic.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/chat-app-api/ProfilePics/8_profilePic.qcve5yby9m.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\8_profilePic.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"qcve5yby9m"},{"Name":"integrity","Value":"sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="},{"Name":"label","Value":"_content/chat-app-api/ProfilePics/8_profilePic.jpg"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"44398"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 28 Jan 2025 12:00:45 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>

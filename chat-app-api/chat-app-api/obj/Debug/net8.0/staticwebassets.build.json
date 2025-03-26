@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yAeaxJZjSs/5wTOzJie/e8Ca5EIQgRKlmh91libuoRU=",
+  "Hash": "FTo8ZsxLBeu2c8SL613sITjjiqOht/ZmhULRORRNDeg=",
   "Source": "chat-app-api",
   "BasePath": "_content/chat-app-api",
   "Mode": "Default",
@@ -17,12 +17,12 @@
   ],
   "Assets": [
     {
-      "Identity": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\DefaultProfilePic\\shiba1.jpg",
+      "Identity": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\DefaultProfilePic\\test.jpg",
       "SourceId": "chat-app-api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\",
       "BasePath": "_content/chat-app-api",
-      "RelativePath": "DefaultProfilePic/shiba1#[.{fingerprint}]?.jpg",
+      "RelativePath": "DefaultProfilePic/test#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -35,7 +35,7 @@
       "Integrity": "OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\DefaultProfilePic\\shiba1.jpg"
+      "OriginalItemSpec": "wwwroot\\DefaultProfilePic\\test.jpg"
     },
     {
       "Identity": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\1_profilePic.jpg",
@@ -52,8 +52,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "j6gbpsyklv",
-      "Integrity": "q+9AwICk//htC0+gYrHSNTBQSXaWdKxv96oEagj3L/o=",
+      "Fingerprint": "qcve5yby9m",
+      "Integrity": "OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\ProfilePics\\1_profilePic.jpg"
@@ -80,12 +80,12 @@
       "OriginalItemSpec": "wwwroot\\ProfilePics\\2_profilePic.jpg"
     },
     {
-      "Identity": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\test_profilePic.jpg",
+      "Identity": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\3_profilePic.jpg",
       "SourceId": "chat-app-api",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\",
       "BasePath": "_content/chat-app-api",
-      "RelativePath": "ProfilePics/test_profilePic#[.{fingerprint}]?.jpg",
+      "RelativePath": "ProfilePics/3_profilePic#[.{fingerprint}]?.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -98,13 +98,55 @@
       "Integrity": "OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\ProfilePics\\test_profilePic.jpg"
+      "OriginalItemSpec": "wwwroot\\ProfilePics\\3_profilePic.jpg"
+    },
+    {
+      "Identity": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\4_profilePic.jpg",
+      "SourceId": "chat-app-api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\",
+      "BasePath": "_content/chat-app-api",
+      "RelativePath": "ProfilePics/4_profilePic#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qcve5yby9m",
+      "Integrity": "OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ProfilePics\\4_profilePic.jpg"
+    },
+    {
+      "Identity": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\8_profilePic.jpg",
+      "SourceId": "chat-app-api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\",
+      "BasePath": "_content/chat-app-api",
+      "RelativePath": "ProfilePics/8_profilePic#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qcve5yby9m",
+      "Integrity": "OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\ProfilePics\\8_profilePic.jpg"
     }
   ],
   "Endpoints": [
     {
-      "Route": "DefaultProfilePic/shiba1.jpg",
-      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\DefaultProfilePic\\shiba1.jpg",
+      "Route": "DefaultProfilePic/test.jpg",
+      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\DefaultProfilePic\\test.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -140,8 +182,8 @@
       ]
     },
     {
-      "Route": "DefaultProfilePic/shiba1.qcve5yby9m.jpg",
-      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\DefaultProfilePic\\shiba1.jpg",
+      "Route": "DefaultProfilePic/test.qcve5yby9m.jpg",
+      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\DefaultProfilePic\\test.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -176,56 +218,11 @@
         },
         {
           "Name": "label",
-          "Value": "DefaultProfilePic/shiba1.jpg"
+          "Value": "DefaultProfilePic/test.jpg"
         },
         {
           "Name": "integrity",
           "Value": "sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="
-        }
-      ]
-    },
-    {
-      "Route": "ProfilePics/1_profilePic.j6gbpsyklv.jpg",
-      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\1_profilePic.jpg",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "59209"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/jpeg"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"q+9AwICk//htC0+gYrHSNTBQSXaWdKxv96oEagj3L/o=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Tue, 04 Mar 2025 10:36:43 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "j6gbpsyklv"
-        },
-        {
-          "Name": "label",
-          "Value": "ProfilePics/1_profilePic.jpg"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-q+9AwICk//htC0+gYrHSNTBQSXaWdKxv96oEagj3L/o="
         }
       ]
     },
@@ -240,7 +237,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "59209"
+          "Value": "44398"
         },
         {
           "Name": "Content-Type",
@@ -248,11 +245,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"q+9AwICk//htC0+gYrHSNTBQSXaWdKxv96oEagj3L/o=\""
+          "Value": "\"OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Tue, 04 Mar 2025 10:36:43 GMT"
+          "Value": "Tue, 28 Jan 2025 12:00:45 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -262,7 +259,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-q+9AwICk//htC0+gYrHSNTBQSXaWdKxv96oEagj3L/o="
+          "Value": "sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="
+        }
+      ]
+    },
+    {
+      "Route": "ProfilePics/1_profilePic.qcve5yby9m.jpg",
+      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\1_profilePic.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44398"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Jan 2025 12:00:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qcve5yby9m"
+        },
+        {
+          "Name": "label",
+          "Value": "ProfilePics/1_profilePic.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="
         }
       ]
     },
@@ -349,8 +391,8 @@
       ]
     },
     {
-      "Route": "ProfilePics/test_profilePic.jpg",
-      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\test_profilePic.jpg",
+      "Route": "ProfilePics/3_profilePic.jpg",
+      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\3_profilePic.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -386,8 +428,8 @@
       ]
     },
     {
-      "Route": "ProfilePics/test_profilePic.qcve5yby9m.jpg",
-      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\test_profilePic.jpg",
+      "Route": "ProfilePics/3_profilePic.qcve5yby9m.jpg",
+      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\3_profilePic.jpg",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -422,7 +464,171 @@
         },
         {
           "Name": "label",
-          "Value": "ProfilePics/test_profilePic.jpg"
+          "Value": "ProfilePics/3_profilePic.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="
+        }
+      ]
+    },
+    {
+      "Route": "ProfilePics/4_profilePic.jpg",
+      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\4_profilePic.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44398"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Jan 2025 12:00:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="
+        }
+      ]
+    },
+    {
+      "Route": "ProfilePics/4_profilePic.qcve5yby9m.jpg",
+      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\4_profilePic.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44398"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Jan 2025 12:00:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qcve5yby9m"
+        },
+        {
+          "Name": "label",
+          "Value": "ProfilePics/4_profilePic.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="
+        }
+      ]
+    },
+    {
+      "Route": "ProfilePics/8_profilePic.jpg",
+      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\8_profilePic.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44398"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Jan 2025 12:00:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw="
+        }
+      ]
+    },
+    {
+      "Route": "ProfilePics/8_profilePic.qcve5yby9m.jpg",
+      "AssetFile": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\8_profilePic.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "44398"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 28 Jan 2025 12:00:45 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qcve5yby9m"
+        },
+        {
+          "Name": "label",
+          "Value": "ProfilePics/8_profilePic.jpg"
         },
         {
           "Name": "integrity",

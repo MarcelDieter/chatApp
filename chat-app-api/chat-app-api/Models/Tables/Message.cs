@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace chat_app_api.Models
+namespace chat_app_api.Models.Tables
 {
     public class Message
     {

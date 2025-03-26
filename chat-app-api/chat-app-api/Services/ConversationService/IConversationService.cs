@@ -5,6 +5,8 @@ namespace chat_app_api.Services.ChatService
 {
     public interface IConversationService
     {
-        Task<int> CreatingConversation(int userId);
+        Task<ConversationDTO?> CreatingConversation(int userId);
+        Task<List<ConversationDTO>?> RetrieveConversations();
+        Task<bool> ResetUnreadMessages(int conversationId);
     }
 }

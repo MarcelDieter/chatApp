@@ -1,4 +1,4 @@
-export interface UserData {
+export interface UserDTO {
   userId: number;
   username: string;
   profilePicUrl: string;

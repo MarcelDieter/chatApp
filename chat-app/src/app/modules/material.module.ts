@@ -13,6 +13,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDivider } from '@angular/material/divider';
 import { MatTooltip } from '@angular/material/tooltip';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 
 const material = [
   MatListModule,
@@ -28,7 +30,9 @@ const material = [
   MatCardModule,
   MatDivider,
   MatTooltip,
-  MatProgressSpinner
+  MatProgressSpinner,
+  MatDatepickerModule,
+  MatSlideToggle 
 ]
 
 @NgModule({

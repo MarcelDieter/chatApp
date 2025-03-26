@@ -1,14 +1,16 @@
 export class TimeAndDate {
-  time: string = '';
-  day: string = '';
-  month: string = '';
-  year: string = '';
+  date: Date;
+  time: string;
+  day: number;
+  month: string;
+  year: number;
 
   constructor(newDate: Date) {
-    this.getTime(newDate);
-    this.day = newDate.getDate().toString();
-    this.getMonth(newDate);
-    this.year = newDate.getFullYear().toString();
+    this.date = newDate;
+    this.time = this.getTime(newDate);
+    this.day = newDate.getDate();
+    this.month = this.getMonth(newDate);
+    this.year = newDate.getFullYear();
   }
 
   getMonth(date: Date) {
@@ -26,28 +28,55 @@ export class TimeAndDate {
       'November',
       'December',
     ];
-    this.month = MONTH[date.getMonth()];
-  }
-
-  turnDateToString() {
-    return this.day + '. ' + this.month + ' ' + this.year;
+    return MONTH[date.getMonth()];
   }
 
   getTime(date: Date) {
-    let minutes = date.getMinutes().toString();
+    let minutes = date.getMinutes().toString().padStart(2, '0');
     let hours = date.getHours().toString();
-    if (minutes.length == 1) {
-      minutes = '0' + minutes;
-    }
-    this.time = hours + ':' + minutes;
+    return `${hours}:${minutes}`;
   }
 
-  isSameDayAs(secondDate: Date) {
-    let secondTimeAndDate = new TimeAndDate(secondDate);
-    return (
-      this.day == secondTimeAndDate.day && 
-      this.month == secondTimeAndDate.month && 
-      this.year == secondTimeAndDate.year
-    );
+
+  getTimeStamp() {
+    const currentDate = new TimeAndDate(new Date());
+    let timeStamp = '';
+
+    if (this.year == currentDate.year && this.month == currentDate.month) {
+      if (this.day == currentDate.day) {
+        timeStamp = 'Today';
+      } 
+      else if (this.day + 1 == currentDate.day) {
+        timeStamp = 'Yesterday';
+      }
+      else if (currentDate.day - this.day <= 6) {
+        timeStamp = this.getDayOfWeek();
+      } 
+    }
+    else {
+      timeStamp = `${this.day}. ${this.month}`;
+      if (this.year != currentDate.year) {
+        timeStamp += ` ${this.year}`;
+      }
+    }
+    return timeStamp;
+  }
+
+  isSameDay(newDate: Date) {
+    let secondDate = new TimeAndDate(newDate);
+    return this.year == secondDate.year && this.month == secondDate.month && this.day == secondDate.day;
+  }
+
+  getDayOfWeek(): string {
+    const DAYS = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+    ]
+    return DAYS[this.date.getDay()];
   }
 }

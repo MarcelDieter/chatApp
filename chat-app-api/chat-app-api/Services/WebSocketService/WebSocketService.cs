@@ -3,12 +3,14 @@ using Fleck;
 using System.Web;
 using chat_app_api.Services.MessageService;
 using System.Text.Json;
+using chat_app_api.Models.Tables;
+using chat_app_api.Models.User;
 
 namespace chat_app_api.Services.WebSocketService
 {
     public class WebSocketService : IWebSocketService                                                                                                   // key:           | value:
     {                                                                                                                                                   //------------------------    
-        private readonly Dictionary<string, IWebSocketConnection> _wsConnections = new Dictionary<string, IWebSocketConnection>();                      // websocketId    | socket
+        private readonly Dictionary<string, IWebSocketConnection> _wsConnections = new Dictionary<string, IWebSocketConnection>();                      // clientId       | socket
         private readonly Dictionary<int, IWebSocketConnection> _wsLoggedInConnections = new Dictionary<int, IWebSocketConnection>();                    // userId         | socket
         private readonly Dictionary<int, List<IWebSocketConnection>> _wsConversationConnections = new Dictionary<int, List<IWebSocketConnection>>();    // conversationId | socket[]
         private readonly IServiceScopeFactory _serviceScopeFactory;
@@ -39,33 +41,26 @@ namespace chat_app_api.Services.WebSocketService
                     _wsConnections.Remove(wsId);
                 };
 
-               socket.OnMessage = async message =>
-                {
+               socket.OnMessage = async message => 
+               {
                     var serializeOptions = new JsonSerializerOptions
                     {
                         PropertyNameCaseInsensitive = true
                     };
-                    WebsocketMessage wsMessage = JsonSerializer.Deserialize<WebsocketMessage>(message, serializeOptions);
-                    Message messageObject = wsMessage.Message;
+                    var wsMessage = JsonSerializer.Deserialize<InformationMessage<Message>>(message, serializeOptions);
+                    if (wsMessage != null)
+                    {
+                        
+                    Message messageObject = wsMessage.Data;
                     using (IServiceScope scope = _serviceScopeFactory.CreateScope())
                     {
                     var messageService = scope.ServiceProvider.GetRequiredService<IMessageService>();
                     messageObject.Id = await messageService.StoreMessage(messageObject);
                     }
                     SendMessageToConversation(messageObject);
-                };
+                    }
+               };
             });
-        }
-
-        private void SendMessageToAllExceptMe(int userId, string message)
-        {
-            foreach (var webSocketConnection in _wsLoggedInConnections)
-            {
-                if (webSocketConnection.Key != userId)
-                {
-                webSocketConnection.Value.Send(message);
-                }
-            }
         }
 
         private void SendMessageToAll(string message)
@@ -78,22 +73,11 @@ namespace chat_app_api.Services.WebSocketService
 
         private void SendMessageToConversation(Message message)
         {
-            var conversationConnections = _wsConversationConnections.Where(kvp => kvp.Key == message.ConversationId).FirstOrDefault();
-            var senderConnection = _wsLoggedInConnections.Where(kvp => kvp.Key == message.SenderId).FirstOrDefault();
-            WebsocketMessage newWsMessage = new WebsocketMessage
+            string jsonString = ConvertToJson("chatMessage", message);
+            var conversationConnections = _wsConversationConnections[message.ConversationId];
+            foreach (var connection in conversationConnections)
             {
-                Type = "chatMessage",
-                Message = message
-            };
-            var serializeOptions = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true,
-            };
-            var jsonMessage = JsonSerializer.Serialize(newWsMessage, serializeOptions);
-            foreach (var connection in conversationConnections.Value)
-            {
-                connection.Send(jsonMessage);
+                connection.Send(jsonString);
             }
         }
 
@@ -101,80 +85,82 @@ namespace chat_app_api.Services.WebSocketService
         {
             var trimmedPath = path.Remove(0, 1);
             var queryParams = HttpUtility.ParseQueryString(trimmedPath);
-            return queryParams["wsId"];
+            return queryParams["wsId"]!;
         }
-        
 
         public void Login(int userId, string wsId)
         {
-            var connection = _wsConnections.Where(kvp => kvp.Key == wsId).FirstOrDefault();
-            //if (!_wsLoggedInConnections.ContainsKey(userId))
-            //{
-            _wsLoggedInConnections.Add(userId, connection.Value);
-            ChangeUserActivityStatus(userId, true);
-            //}
+            var connection = _wsConnections[wsId];
+            _wsLoggedInConnections.Add(userId, connection);
+            string jsonString = ConvertToJson("userActivity", new { userId = userId, active = true});
+            SendMessageToAll(jsonString);
         }
 
         private void RemoveLoggedInConnection(string wsId)
         {
-            var connection = _wsConnections.Where(kvp => kvp.Key == wsId).FirstOrDefault();
-            var loggedInConnection = _wsLoggedInConnections.Where(kvp => kvp.Value == connection.Value).FirstOrDefault();
+            var connection = _wsConnections[wsId];
+            var loggedInConnection = _wsLoggedInConnections.Where(kvp => kvp.Value == connection).FirstOrDefault();
             _wsLoggedInConnections.Remove(loggedInConnection.Key);
         }
 
         public void Logout(int userId)
         {
-            ChangeUserActivityStatus(userId, false);
+            string jsonString = ConvertToJson("userActivity", new { userId = userId, active = false });
+            SendMessageToAll(jsonString);
             _wsLoggedInConnections.Remove(userId);
         }
 
-        public void SendNewUserMessage(UserData user)
+        public string ConvertToJson<T>(string type, T MessageObject) 
         {
-            newUserMessage newUserMessage = new newUserMessage
+            InformationMessage<T> newMessage = new InformationMessage<T>
             {
-                Type = "newUser",
-                UserData = user
+                Type = type,
+                Data = MessageObject
             };
             var serializeOptions = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 WriteIndented = true,
             };
-            string jsonString = JsonSerializer.Serialize(newUserMessage, serializeOptions);
-            SendMessageToAll(jsonString);
+            return JsonSerializer.Serialize(newMessage, serializeOptions);
         }
 
-        private void ChangeUserActivityStatus(int userId, bool loggedIn)
+        public void StartConversation(ConversationDTO conversationDTO)
         {
-            ActiveStatusMessage newActiveStatusMessage = new ActiveStatusMessage
-            {
-                Type = "userActivity",
-                UserId = userId,
-                Active = loggedIn
-            };
-            var serializeOptions = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true,
-            };
-            string jsonString = JsonSerializer.Serialize(newActiveStatusMessage, serializeOptions);
-            SendMessageToAll(jsonString);
-        }
-
-        public void StartConversation(ConversationInformation conInfo)
-        {
-            if (_wsConversationConnections.ContainsKey(conInfo.Id))
+            if (_wsConversationConnections.ContainsKey(conversationDTO.Id))
             {
                 return;
             }
-            List<IWebSocketConnection> connections = new List<IWebSocketConnection>();
-            foreach (var memberId in conInfo.MemberIds)
+           var connections = new List<IWebSocketConnection>();
+            foreach (var memberId in conversationDTO.MemberIds)
             {
-                var connection = _wsLoggedInConnections.Where(kvp => kvp.Key == memberId).FirstOrDefault();
-                connections.Add(connection.Value);
+                var connection = _wsLoggedInConnections[memberId];
+                if (connection != null)
+                {
+                connections.Add(connection);
+                }
             }
-            _wsConversationConnections.Add(conInfo.Id, connections);
+            _wsConversationConnections.Add(conversationDTO.Id, connections);
         }
         
+
+        public void addUserToConversationWhenLoggingIn(int conId, int userId)
+        {
+            var connection = _wsLoggedInConnections[userId];
+            bool containsKey = _wsConversationConnections.ContainsKey(conId);
+            if (!containsKey)
+            {
+                _wsConversationConnections.Add(conId, new List<IWebSocketConnection>([connection]));
+            }
+            else
+            {
+                _wsConversationConnections[conId].Add(connection); 
+            }
+        }
+
+        public void SendNewUserMessage(UserDTO userDTO)
+        {
+            SendMessageToAll(ConvertToJson("newUser", userDTO));
+        }
     }
 }

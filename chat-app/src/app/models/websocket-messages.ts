@@ -1,17 +1,7 @@
 import { Message } from './message'
-import { UserData } from './user'
+import { UserDTO } from './user'
 
-export interface ActiveUserMessage {
+export interface InformationMessage {
   type: string,
-  userId: number,
-  active: boolean
-}
-export interface NewUserMesaage {
-  type: string,
-  userData: UserData
-}
-
-export interface WebsocketChatMessage {
-  type: string,
-  message: Message
+  data: {userId: number, active: boolean} | UserDTO | Message
 }

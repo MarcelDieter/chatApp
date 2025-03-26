@@ -1,9 +1,10 @@
-﻿using chat_app_api.Models;
+﻿using chat_app_api.Models.User;
 
 namespace chat_app_api.Services.UserService
 {
     public interface IUserService
     {
-        Task<List<UserData>> getAllUsers();
+        Task<List<UserDTO>> getAllUsers();
     }
 }
+    

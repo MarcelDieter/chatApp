@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\DefaultProfilePic\\shiba1.jpg",
-      "PackagePath": "staticwebassets\\DefaultProfilePic\\shiba1.jpg"
+      "Id": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\DefaultProfilePic\\test.jpg",
+      "PackagePath": "staticwebassets\\DefaultProfilePic\\test.jpg"
     },
     {
       "Id": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\1_profilePic.jpg",
@@ -13,8 +13,16 @@
       "PackagePath": "staticwebassets\\ProfilePics\\2_profilePic.jpg"
     },
     {
-      "Id": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\test_profilePic.jpg",
-      "PackagePath": "staticwebassets\\ProfilePics\\test_profilePic.jpg"
+      "Id": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\3_profilePic.jpg",
+      "PackagePath": "staticwebassets\\ProfilePics\\3_profilePic.jpg"
+    },
+    {
+      "Id": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\4_profilePic.jpg",
+      "PackagePath": "staticwebassets\\ProfilePics\\4_profilePic.jpg"
+    },
+    {
+      "Id": "C:\\P\\Projekte\\Angular-Projects\\chat-app\\chat-app-api\\chat-app-api\\wwwroot\\ProfilePics\\8_profilePic.jpg",
+      "PackagePath": "staticwebassets\\ProfilePics\\8_profilePic.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.chat-app-api.props",

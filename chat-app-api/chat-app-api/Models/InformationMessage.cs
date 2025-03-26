@@ -1,8 +1,8 @@
 ﻿namespace chat_app_api.Models
 {
-    public class newUserMessage
+    public class InformationMessage<T>
     {
         public required string Type { get; set; }
-        public required UserData UserData { get; set; }
+        public required T Data { get; set; }
     }
 }

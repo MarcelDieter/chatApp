@@ -1,4 +1,4 @@
-﻿using chat_app_api.Models;
+﻿using chat_app_api.Models.Tables;
 using Microsoft.EntityFrameworkCore;
 
 namespace chat_app_api.Context

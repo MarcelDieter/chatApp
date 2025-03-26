@@ -2,14 +2,14 @@
 @if (createForm) {
   <form [formGroup]='createForm'>
     <mat-dialog-content>
-      <div class='profilePic'>
+      <div class='profile-pic'>
         Your Profile Picture:
         <img [src]='imageDisplayed' (click)='fileInput.click()'>
         <input type='file' #fileInput (change)='onFileSelected($event)' style='display: none'>
       </div>
       <div class='input-container'>
         @if (usernameErrorMessage) {
-          <div class='errorMessage'>{{usernameErrorMessage}}</div>
+          <div class='error-message'>{{usernameErrorMessage}}</div>
         }
         <mat-icon>person</mat-icon>
         <mat-form-field floatLabel='auto'>

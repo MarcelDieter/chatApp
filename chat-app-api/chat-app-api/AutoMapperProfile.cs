@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using chat_app_api.Models;
+using chat_app_api.Models.Tables;
+using chat_app_api.Models.User;
 
 namespace chat_app_api
 {
@@ -7,8 +8,8 @@ namespace chat_app_api
     {
         public AutoMapperProfile()
         {
-            CreateMap<User, UserData>();
-            CreateMap<UserData, User>();
+            CreateMap<User, UserDTO>();    
+            CreateMap<UserDTO, User>();
         }
     }
 }

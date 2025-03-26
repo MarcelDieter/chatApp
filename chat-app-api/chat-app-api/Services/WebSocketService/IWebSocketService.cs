@@ -1,4 +1,5 @@
 ﻿using chat_app_api.Models;
+using chat_app_api.Models.User;
 
 namespace chat_app_api.Services.WebSocketService
 {
@@ -6,8 +7,10 @@ namespace chat_app_api.Services.WebSocketService
     {
         void Login(int userId, string wsId);
         void Logout(int userId);
-        void SendNewUserMessage(UserData user);
-        void StartConversation(ConversationInformation conInfo);
-        public void StartWebSocketServer();
+        string ConvertToJson<T>(string type, T Data);
+        void StartConversation(ConversationDTO connversationDTO);
+        void StartWebSocketServer();
+        void addUserToConversationWhenLoggingIn(int conId, int userId);
+        void SendNewUserMessage(UserDTO userDTO);
     }
 }

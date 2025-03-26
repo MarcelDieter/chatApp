@@ -1,4 +1,6 @@
-wwwroot\DefaultProfilePic\shiba1.jpg
+wwwroot\DefaultProfilePic\test.jpg
 wwwroot\ProfilePics\1_profilePic.jpg
 wwwroot\ProfilePics\2_profilePic.jpg
-wwwroot\ProfilePics\test_profilePic.jpg
+wwwroot\ProfilePics\3_profilePic.jpg
+wwwroot\ProfilePics\4_profilePic.jpg
+wwwroot\ProfilePics\8_profilePic.jpg

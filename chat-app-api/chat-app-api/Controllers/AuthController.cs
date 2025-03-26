@@ -1,18 +1,8 @@
-﻿using AutoMapper;
-using chat_app_api.Context;
-using chat_app_api.Models;
+﻿using chat_app_api.Models.Response;
+using chat_app_api.Models.User;
 using chat_app_api.Services.AuthService;
-using chat_app_api.Services.UserService;
-using Fleck;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Net.WebSockets;
-using System.Security.Claims;
-using System.Text;
 
 namespace chat_app_api.Controllers
 {
@@ -65,13 +55,13 @@ namespace chat_app_api.Controllers
             var result = await _authService.Logout();
             if (!result)
             {
-                return NotFound(new { Message = "User not found or already logged out!" });
+                return BadRequest(new { Message = "Failed to log out. Please try again!" });
             }
             return Ok(new { Message = "Logged out successfully!" });
         }
 
         [HttpPost("refresh-tokens")]
-        public async Task<ActionResult<TokenResponseDto>> RefreshToken([FromBody] RefreshTokenRequestDto refresh)
+        public async Task<ActionResult<TokenResponse>> RefreshToken([FromBody] RefreshTokenRequest refresh)
         {
             var result = await _authService.RefreshTokensAsync(refresh);
             if (result == null || result.AccessToken == null || result.RefreshToken == null)
@@ -86,6 +76,13 @@ namespace chat_app_api.Controllers
         {
             await _authService.DeleteRefreshToken();
             return Ok(new {Message = "RefreshToken deleted successfully!"});
+        }
+
+        [HttpGet("default-pic-url")]
+        public IActionResult GetDefaultPicUrl()
+        {
+            string profilePicUrl = _authService.GetDefaultPicUrl();
+            return Ok(new {url = profilePicUrl});
         }
 
     }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace chat_app_api.Models
+namespace chat_app_api.Models.User
 {
     public class RegisterUser
     {

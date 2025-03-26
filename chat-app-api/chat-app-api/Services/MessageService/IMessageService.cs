@@ -1,4 +1,4 @@
-﻿using chat_app_api.Models;
+﻿using chat_app_api.Models.Tables;
 
 namespace chat_app_api.Services.MessageService
 {

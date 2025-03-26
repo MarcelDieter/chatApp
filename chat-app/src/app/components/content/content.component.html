@@ -1,18 +1,29 @@
 @let openConversation = this.openConversation();
 @if (openConversation) {
+  <div class='open-conversation-banner'>
+    <img [src]='openConversation.conversationPictureUrl'>
+    <p>{{openConversation.conversationName}}</p>
+  </div>
   <div class='form-and-message-container'>
-    <div id='messageContainer'>
+    <div id='message-container'>
       @for (message of openConversation.messages; track message.id; let i = $index) {
         @let date = createNewDate(message.date);
-        @if (i == 0 || !date.isSameDayAs(openConversation.messages[i - 1].date)) {
-          <div class='date'>
+        @if (i == 0 || !date.isSameDay(openConversation.messages[i - 1].date)) {
+          <div class='divider'>
             <mat-divider></mat-divider>
-            <p>{{ date.turnDateToString()}}</p>
+            <p>{{ date.getTimeStamp()}}</p>
+            <mat-divider></mat-divider>
+          </div>
+        }
+        @if (openConversation.messages.length - i == openConversation.unreadMessages && notificationsOn()) {
+          <div class='divider unread-messages-divider'>
+            <mat-divider></mat-divider>
+            <p>Unread Messages</p>
             <mat-divider></mat-divider>
           </div>
         }
         <div class='message'>
-          <mat-card>
+          <mat-card [ngClass]="{'unread-message': openConversation.messages.length - i <= openConversation.unreadMessages && notificationsOn()}">
             <mat-card-header>
               <img mat-card-avatar src='{{ getUserById(message.senderId)?.profilePicUrl }}'>
               <mat-card-title>{{ getUserById(message.senderId)?.username }}</mat-card-title>
@@ -26,13 +37,31 @@
       }
     </div>
     <div class='form-container'>
-      <!-- <form class='inputField' appearance="fill"> -->
-        <input class='inputField' [(ngModel)]='inputMessage' (keydown.enter)="addMessage()">
-      <!-- </form> -->
+      <input 
+        #inputField 
+        [ngClass]="{
+          'input-field': true, 
+          'invalid-input': invalidInput, 
+          'shake': shake}" 
+        [(ngModel)]='inputMessage' 
+        (keydown.enter)="addMessage()" 
+        (focus)="updateUnreadMessagesCount()" 
+        (input)="resetInvalidInput()" 
+        (blur)="resetInvalidInput()"
+        [placeholder]="placeholder"
+      >
       <button mat-icon-button (click)='addMessage()'>
         <mat-icon class='large-icon'>send</mat-icon>
       </button>
     </div>
+    <!-- <div>
+      <mat-form-field>
+        <input matInput [matDatepicker]='picker' [(ngModel)]='selectedDate'>
+        <mat-datepicker-toggle matIconSuffix [for]='picker'>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div> -->
   </div>
 }
 

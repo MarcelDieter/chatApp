@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using chat_app_api.Context;
-using chat_app_api.Models;
+using chat_app_api.Models.Response;
+using chat_app_api.Models.Tables;
+using chat_app_api.Models.User;
 using chat_app_api.Services.WebSocketService;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
-using System.Reflection.Metadata.Ecma335;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -60,9 +58,9 @@ namespace chat_app_api.Services.AuthService
 
         public async Task<LoginResponse> CreateLoginResponse(User user)
         {
-            LoginResponse res = new LoginResponse
+            var res = new LoginResponse
             {
-                UserData = new UserData
+                UserDTO = new UserDTO
                 {
                     UserId = user.UserId,
                     Username = user.Username,
@@ -74,9 +72,9 @@ namespace chat_app_api.Services.AuthService
             return res;
         }
 
-        private async Task<TokenResponseDto> CreateTokenResponse(User user)
+        private async Task<TokenResponse> CreateTokenResponse(User user)
         {
-            return new TokenResponseDto
+            return new TokenResponse
             {
                 AccessToken = CreateToken(user),
                 RefreshToken = await GenerateAndSaveRefreshTokenAsync(user)
@@ -106,11 +104,11 @@ namespace chat_app_api.Services.AuthService
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
-            _webSocketService.SendNewUserMessage(_mapper.Map<UserData>(user));
+            _webSocketService.SendNewUserMessage(_mapper.Map<UserDTO>(user));
             return user;
         }
 
-        private async Task<User?> ValidateRefreshTokenAsync(RefreshTokenRequestDto req)
+        private async Task<User?> ValidateRefreshTokenAsync(RefreshTokenRequest req)
         {
             var user = await _context.Users.FindAsync(req.UserId);
             if (user == null || user.RefreshToken != req.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
@@ -120,7 +118,7 @@ namespace chat_app_api.Services.AuthService
             return user;
         }
 
-        public async Task<TokenResponseDto?> RefreshTokensAsync(RefreshTokenRequestDto req)
+        public async Task<TokenResponse?> RefreshTokensAsync(RefreshTokenRequest req)
         {
             var user = await ValidateRefreshTokenAsync(req);
             if (user == null)
@@ -133,7 +131,7 @@ namespace chat_app_api.Services.AuthService
 
         private string GenerateRefreshToken()
         {
-            var randomNumber = new byte[32];
+            byte[] randomNumber = new byte[32];
             using var rng = RandomNumberGenerator.Create();
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
@@ -141,7 +139,7 @@ namespace chat_app_api.Services.AuthService
 
         private async Task<string> GenerateAndSaveRefreshTokenAsync(User user)
         {
-            var refreshToken = GenerateRefreshToken();
+            string refreshToken = GenerateRefreshToken();
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
             await _context.SaveChangesAsync();
@@ -156,12 +154,16 @@ namespace chat_app_api.Services.AuthService
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new Claim(ClaimTypes.Role, user.Role)
             };
+            string? appSettingsToken = _configuration.GetValue<string>("AppSettings:Token");
+            if (appSettingsToken == null) 
+            {
+                return "";
+            }
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettingsToken));
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("AppSettings:Token")));
+            SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-
-            var tokenDescriptor = new JwtSecurityToken(
+            JwtSecurityToken tokenDescriptor = new JwtSecurityToken(
                 issuer: _configuration.GetValue<string>("AppSettings:Issuer"),
                 audience: _configuration.GetValue<string>("AppSettings:Audience"),
                 claims: claims,
@@ -169,15 +171,25 @@ namespace chat_app_api.Services.AuthService
                 signingCredentials: creds
             );
 
-            var jwt = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
+            string jwt = new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
 
             return jwt;
         }
 
         public async Task DeleteRefreshToken()
         {
-            int id = int.Parse(_httpcontextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var user = await _context.Users.FindAsync(id);
+            var httpContext = _httpcontextAccessor.HttpContext;
+            if (httpContext == null)
+            {
+                return;
+            }
+            string? userId = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null)
+            {
+                return;
+            }
+            int id = int.Parse(userId);
+            User? user = await _context.Users.FindAsync(id);
             if (user != null)
             {
                 user.RefreshToken = null;
@@ -188,8 +200,11 @@ namespace chat_app_api.Services.AuthService
 
         private async Task<string> AddProfilePicture(RegisterUser user)
         {
-            var request = _httpcontextAccessor.HttpContext.Request;
-            string hostUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
+            string imageUrl = "";
+            var httpContext = _httpcontextAccessor.HttpContext;
+            if (httpContext != null)
+            {
+           
             string FilePath = _webHostEnvironment.WebRootPath + "\\ProfilePics\\";
             if (!Directory.Exists(FilePath))
             {
@@ -211,18 +226,34 @@ namespace chat_app_api.Services.AuthService
             }
             else
             {
-                string defaultPic = "shiba1.jpg";
-                string defaultPicPath = _webHostEnvironment.WebRootPath + "\\DefaultProfilePic\\" + defaultPic;
-                File.Copy(defaultPicPath, imagePath, overwrite: true);
+                string defaultPicFolderPath = _webHostEnvironment.WebRootPath + "\\DefaultProfilePic";
+                if (Directory.Exists(defaultPicFolderPath))
+                {
+                    var images = Directory.GetFiles(defaultPicFolderPath, "*.*",SearchOption.TopDirectoryOnly);
+                    string defaultPicPath = images[0];
+                    File.Copy(defaultPicPath, imagePath, overwrite: true);
+                }
             }
-            string imageUrl = hostUrl + "/ProfilePics/" + user.Username + "_profilePic.jpg";
+            var request = httpContext.Request;
+            string hostUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
+            imageUrl = hostUrl + "/ProfilePics/" + user.Username + "_profilePic.jpg";
+            }
             return imageUrl;
         }
 
         public async Task<bool> Logout()
         {
-            int id = int.Parse(_httpcontextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var user = await _context.Users.FindAsync(id);
+            var httpContext = _httpcontextAccessor.HttpContext;
+            if (httpContext == null ||httpContext.User == null) {
+                return false;
+            }
+            string? userId = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userId == null) 
+            {
+                return false;
+            }
+            int id = int.Parse(userId);
+            User? user = await _context.Users.FindAsync(id);
             if (user == null)
             {
                 return false;
@@ -231,6 +262,29 @@ namespace chat_app_api.Services.AuthService
             _webSocketService.Logout(user.UserId);
 
             return true;
+        }
+
+        public string GetDefaultPicUrl()
+        {
+            string defaultPicFolderPath = _webHostEnvironment.WebRootPath + "\\DefaultProfilePic";
+            if (!Directory.Exists(defaultPicFolderPath))
+            {
+                return "";
+            }
+            var images = Directory.GetFiles(defaultPicFolderPath, "*.*", SearchOption.TopDirectoryOnly);
+            var firstImageName = Path.GetFileName(images[0]);
+            string defaultPicPath = "/DefaultProfilePic/";
+            var httpContext = _httpcontextAccessor.HttpContext;
+
+            if (httpContext == null)
+            {
+                return "";
+            }
+            var request = httpContext.Request;
+            string hostUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
+            string fullUrl = hostUrl + "/DefaultProfilePic/" + firstImageName;
+
+            return fullUrl;
         }
     }
         

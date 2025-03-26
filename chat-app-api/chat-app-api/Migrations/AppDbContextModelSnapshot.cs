@@ -22,7 +22,7 @@ namespace chat_app_api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("chat_app_api.Models.Conversation", b =>
+            modelBuilder.Entity("chat_app_api.Models.Tables.Conversation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,7 +41,7 @@ namespace chat_app_api.Migrations
                     b.ToTable("Conversations");
                 });
 
-            modelBuilder.Entity("chat_app_api.Models.Message", b =>
+            modelBuilder.Entity("chat_app_api.Models.Tables.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -70,7 +70,7 @@ namespace chat_app_api.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("chat_app_api.Models.User", b =>
+            modelBuilder.Entity("chat_app_api.Models.Tables.User", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
@@ -96,6 +96,7 @@ namespace chat_app_api.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Role")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
@@ -110,12 +111,15 @@ namespace chat_app_api.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("chat_app_api.Models.UserConversation", b =>
+            modelBuilder.Entity("chat_app_api.Models.Tables.UserConversation", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("ConversationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UnreadMessages")
                         .HasColumnType("int");
 
                     b.HasKey("UserId", "ConversationId");
@@ -125,15 +129,15 @@ namespace chat_app_api.Migrations
                     b.ToTable("UserConversations");
                 });
 
-            modelBuilder.Entity("chat_app_api.Models.Message", b =>
+            modelBuilder.Entity("chat_app_api.Models.Tables.Message", b =>
                 {
-                    b.HasOne("chat_app_api.Models.Conversation", "Conversation")
+                    b.HasOne("chat_app_api.Models.Tables.Conversation", "Conversation")
                         .WithMany("Messages")
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("chat_app_api.Models.User", "Sender")
+                    b.HasOne("chat_app_api.Models.Tables.User", "Sender")
                         .WithMany("Messages")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -144,15 +148,15 @@ namespace chat_app_api.Migrations
                     b.Navigation("Sender");
                 });
 
-            modelBuilder.Entity("chat_app_api.Models.UserConversation", b =>
+            modelBuilder.Entity("chat_app_api.Models.Tables.UserConversation", b =>
                 {
-                    b.HasOne("chat_app_api.Models.Conversation", "Conversation")
+                    b.HasOne("chat_app_api.Models.Tables.Conversation", "Conversation")
                         .WithMany("UserConversation")
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("chat_app_api.Models.User", "User")
+                    b.HasOne("chat_app_api.Models.Tables.User", "User")
                         .WithMany("UserConversations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -163,14 +167,14 @@ namespace chat_app_api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("chat_app_api.Models.Conversation", b =>
+            modelBuilder.Entity("chat_app_api.Models.Tables.Conversation", b =>
                 {
                     b.Navigation("Messages");
 
                     b.Navigation("UserConversation");
                 });
 
-            modelBuilder.Entity("chat_app_api.Models.User", b =>
+            modelBuilder.Entity("chat_app_api.Models.Tables.User", b =>
                 {
                     b.Navigation("Messages");
 

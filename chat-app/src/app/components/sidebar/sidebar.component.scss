@@ -11,6 +11,10 @@ mat-action-list button {
   width: 170px;
   margin: 10px;
   border-radius: 20px;
+
+  &.selected-conversation {
+  background-color: rgba(36, 32, 32, 0.534);
+  }
 }
 
 mat-action-list button * {
@@ -36,4 +40,9 @@ p mat-icon {
 
 .add-chat {
   color: white;
+}
+
+.dialog-container{
+  width: 80rem;
+  height: 20rem;
 }

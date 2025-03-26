@@ -140,17 +140,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RefreshTokenRequestDto"
+                "$ref": "#/components/schemas/RefreshTokenRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RefreshTokenRequestDto"
+                "$ref": "#/components/schemas/RefreshTokenRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RefreshTokenRequestDto"
+                "$ref": "#/components/schemas/RefreshTokenRequest"
               }
             }
           }
@@ -161,17 +161,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/TokenResponseDto"
+                  "$ref": "#/components/schemas/TokenResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TokenResponseDto"
+                  "$ref": "#/components/schemas/TokenResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TokenResponseDto"
+                  "$ref": "#/components/schemas/TokenResponse"
                 }
               }
             }
@@ -191,6 +191,18 @@
         }
       }
     },
+    "/api/Auth/default-pic-url": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Conversation/start-conversation/{userId}": {
       "post": {
         "tags": [
@@ -199,6 +211,41 @@
         "parameters": [
           {
             "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Conversation/retrieve-conversations": {
+      "get": {
+        "tags": [
+          "Conversation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Conversation/reset-unread-messages/{conversationId}": {
+      "post": {
+        "tags": [
+          "Conversation"
+        ],
+        "parameters": [
+          {
+            "name": "conversationId",
             "in": "path",
             "required": true,
             "schema": {
@@ -282,15 +329,15 @@
       "LoginResponse": {
         "required": [
           "tokens",
-          "userData"
+          "userDTO"
         ],
         "type": "object",
         "properties": {
-          "userData": {
-            "$ref": "#/components/schemas/UserData"
+          "userDTO": {
+            "$ref": "#/components/schemas/UserDTO"
           },
           "tokens": {
-            "$ref": "#/components/schemas/TokenResponseDto"
+            "$ref": "#/components/schemas/TokenResponse"
           }
         },
         "additionalProperties": false
@@ -318,7 +365,7 @@
         },
         "additionalProperties": false
       },
-      "RefreshTokenRequestDto": {
+      "RefreshTokenRequest": {
         "required": [
           "refreshToken"
         ],
@@ -335,7 +382,7 @@
         },
         "additionalProperties": false
       },
-      "TokenResponseDto": {
+      "TokenResponse": {
         "required": [
           "accessToken",
           "refreshToken"
@@ -353,7 +400,7 @@
         },
         "additionalProperties": false
       },
-      "UserData": {
+      "UserDTO": {
         "required": [
           "profilePicUrl",
           "username"

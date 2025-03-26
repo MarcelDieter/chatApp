@@ -1,6 +1,4 @@
-﻿using chat_app_api.Models;
-using chat_app_api.Services.ChatService;
-using Microsoft.AspNetCore.Http;
+﻿using chat_app_api.Services.ChatService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace chat_app_api.Controllers
@@ -19,10 +17,27 @@ namespace chat_app_api.Controllers
         [HttpPost("start-conversation/{userId}")]
         public async Task<IActionResult> StartConversation(int userId)
         {
-            var chatId = await _conversationService.CreatingConversation(userId);
-            return Ok(chatId);
+            var conversation = await _conversationService.CreatingConversation(userId);
+            return Ok(conversation);
         }
 
+        [HttpGet("retrieve-conversations")]
+        public async Task<IActionResult> RetrieveConversations()
+        {
+            var conversations = await _conversationService.RetrieveConversations();
+            return Ok(conversations);
+        }
+
+        [HttpPost("reset-unread-messages/{conversationId}")]
+        public async Task<IActionResult> ResetUnreadMessages(int conversationId)
+        {
+            var resetSuccessful = await _conversationService.ResetUnreadMessages(conversationId);
+            if (!resetSuccessful)
+            {
+                return BadRequest("Unable to reset unread messages!");
+            }
+            return Ok("Unread Messages successful reseted!");
+        } 
         //[HttpPost("start-group-conversation")]
         //public async Task<IActionResult> StartGroupConversation([FromBody] )
         //{

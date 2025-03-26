@@ -3,12 +3,18 @@
 </div>
 <div>
   <mat-action-list>
-  @for (conversation of conversationList(); track conversation.conversationId) {
+  @for (conversation of conversationList(); track conversation.id) {
     @let user = getUserById(conversation);
-    <button mat-list-item (click)='displayChat(conversation.conversationId)'>
-      <img matListItemAvatar src='{{ user?.profilePicUrl }}'/>
+    <button 
+    mat-list-item 
+    (click)='displayChat(conversation.id)' 
+    [ngClass]="{
+      'selected-conversation': openConversationId() == conversation.id}"
+    >
+      <img matListItemAvatar src='{{ conversation.conversationPictureUrl }}'/>
       <h3 matListItemTitle class='chatName'>
-        <span matBadge="10" matBadgeOverlap="false">{{ user?.username }}</span></h3>
+        <span [matBadge]="conversation.unreadMessages" [matBadgeHidden]="!conversation.unreadMessages || !notificationsOn()" matBadgeOverlap="false">{{ conversation.conversationName }}</span>
+      </h3>
       <p matListItemLine>
         @if (user?.active) {
           <mat-icon style='color: lightgreen'>check_circle</mat-icon>

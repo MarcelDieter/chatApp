@@ -1,8 +1,10 @@
 import { Message } from './message';
 
 export interface Conversation {
-  conversationId: number;
-  profilePicUrl: string,
+  id: number;
+  conversationName?: string;
+  conversationPictureUrl?: string,
   messages: Message[];
   memberIds : number[]; 
+  unreadMessages: number;
 }

@@ -1,6 +1,6 @@
 import { HttpClient} from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { LoginUser, UserData } from '../models/user';
+import { LoginUser, UserDTO } from '../models/user';
 import { Observable } from 'rxjs';
 import { TokenResponse } from '../models/token-response';
 import { LoginResponse } from '../models/login-response';
@@ -16,8 +16,8 @@ export class AuthService {
   private http = inject(HttpClient);
   private currentUserService = inject(CurrentUserService);
 
-  register(userObj: FormData) {
-    return this.http.post<any>(`${this.baseUrl}/register`, userObj);
+  register(formData: FormData) {
+    return this.http.post(`${this.baseUrl}/register`, formData);
   }
   
   login(loginObj: LoginUser): Observable<LoginResponse>{
@@ -38,7 +38,11 @@ export class AuthService {
     return this.http.delete(`${this.baseUrl}/revoke-token`);
   }
 
-  getUser(): Observable<UserData> {
-    return this.http.get<UserData>(`${this.baseUrl}/user`);
+  getUser(): Observable<UserDTO> {
+    return this.http.get<UserDTO>(`${this.baseUrl}/user`);
+  }
+
+  getDefaultProfilePic(): Observable<{ url: string }> {
+    return this.http.get<{ url: string }>(`${this.baseUrl}/default-pic-url`);
   }
 }

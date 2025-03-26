@@ -1,6 +1,16 @@
 [
   {
     "ContainingType": "chat_app_api.Controllers.AuthController",
+    "Method": "GetDefaultPicUrl",
+    "RelativePath": "api/Auth/default-pic-url",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.AuthController",
     "Method": "Authenticate",
     "RelativePath": "api/Auth/login",
     "HttpMethod": "POST",
@@ -9,13 +19,13 @@
     "Parameters": [
       {
         "Name": "userObj",
-        "Type": "chat_app_api.Models.LoginUser",
+        "Type": "chat_app_api.Models.User.LoginUser",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "chat_app_api.Models.LoginResponse",
+        "Type": "chat_app_api.Models.Response.LoginResponse",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -45,13 +55,13 @@
     "Parameters": [
       {
         "Name": "refresh",
-        "Type": "chat_app_api.Models.RefreshTokenRequestDto",
+        "Type": "chat_app_api.Models.Response.RefreshTokenRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "chat_app_api.Models.TokenResponseDto",
+        "Type": "chat_app_api.Models.Response.TokenResponse",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -97,6 +107,32 @@
     "Method": "RevokeToken",
     "RelativePath": "api/Auth/revoke-token",
     "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.ConversationController",
+    "Method": "ResetUnreadMessages",
+    "RelativePath": "api/Conversation/reset-unread-messages/{conversationId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "conversationId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.ConversationController",
+    "Method": "RetrieveConversations",
+    "RelativePath": "api/Conversation/retrieve-conversations",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],

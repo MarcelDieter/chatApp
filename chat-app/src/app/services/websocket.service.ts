@@ -3,6 +3,7 @@ import { Message } from '../models/message';
 import { ConversationService } from './conversation.service';
 import { UserListService } from './user-list.service';
 import { v4 as uuidv4 } from 'uuid';
+import { InformationMessage } from '../models/websocket-messages';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class WebsocketService {
     this.wsId = uuidv4();
     this.ws = new WebSocket(`ws://localhost:8181?wsId=${this.wsId}`);
     this.ws.onmessage = (message) => {
-      const obj = JSON.parse(message.data);
+      const obj: InformationMessage = JSON.parse(message.data);
       switch (obj.type) {
         case 'chatMessage': {
           this.conversationService.updateMessages(obj);
@@ -44,7 +45,7 @@ export class WebsocketService {
     }
     let messageContainer = {
       type: 'chatMessage',
-      message: message
+      data: message
     }
     let jsonObject = JSON.stringify(messageContainer);
     this.ws.send(jsonObject);

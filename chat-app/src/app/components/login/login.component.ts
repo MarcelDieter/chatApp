@@ -9,6 +9,7 @@ import { WebsocketService } from '../../services/websocket.service';
 import { MaterialModule } from '../../modules/material.module';
 import { CurrentUserService } from '../../services/current-user.service';
 import { UserListService } from '../../services/user-list.service';
+import { ConversationService } from '../../services/conversation.service';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
   private currentUserService = inject(CurrentUserService);
   private userListService = inject(UserListService);
   private websocketService = inject(WebsocketService);
+  private conversationService = inject(ConversationService);
 
   user = this.currentUserService.user;
   
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
       wsId: [null],
     });
+    // this.developmentLogin();
   }
 
   login() {
@@ -52,9 +55,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('authToken', loginResponse.tokens.accessToken);
           localStorage.setItem('refreshToken', loginResponse.tokens.refreshToken);
           this.dialogRef.close();
-          this.currentUserService.user.set(loginResponse.userData);
-          console.log(this.currentUserService.user());
+          this.currentUserService.user.set(loginResponse.userDTO);
           this.userListService.getAllUsers();
+          this.conversationService.getConversations();
           this.loginSend = false;
         },
         error: (err) => {
@@ -69,4 +72,12 @@ export class LoginComponent implements OnInit {
     this.dialog.open(CreateAccountComponent);
   }
 
+  developmentLogin() {
+    this.loginForm?.patchValue({
+      username: '1',
+      password: '1'
+    });
+
+    this.login();
+  }
 }

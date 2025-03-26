@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using chat_app_api.Context;
-using chat_app_api.Models;
+using chat_app_api.Models.User;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -19,10 +19,10 @@ namespace chat_app_api.Services.UserService
             _mapper = mapper;
         }
 
-        public async Task<List<UserData>> getAllUsers()
+        public async Task<List<UserDTO>> getAllUsers()
         {
             var users = await _context.Users.ToListAsync();
-            var userDtos = _mapper.Map<List<UserData>>(users);
+            var userDtos = _mapper.Map<List<UserDTO>>(users);
             return userDtos;
         }
     }
