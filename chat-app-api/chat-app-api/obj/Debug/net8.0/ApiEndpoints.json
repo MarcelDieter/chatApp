@@ -1,13 +1,29 @@
 [
   {
     "ContainingType": "chat_app_api.Controllers.AuthController",
-    "Method": "GetDefaultPicUrl",
-    "RelativePath": "api/Auth/default-pic-url",
-    "HttpMethod": "GET",
+    "Method": "CheckIfLoggedIn",
+    "RelativePath": "api/Auth/check-if-logged-in/{wsId}",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
+    "Parameters": [
+      {
+        "Name": "wsId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "chat_app_api.Models.Response.LoginResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "chat_app_api.Controllers.AuthController",
@@ -95,7 +111,7 @@
         "IsRequired": false
       },
       {
-        "Name": "ProfilePicUrl",
+        "Name": "ProfilePic",
         "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       }
@@ -110,6 +126,32 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.ConversationController",
+    "Method": "CreateGroup",
+    "RelativePath": "api/Conversation/create-group",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ConversationName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ConversationPicture",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "MemberIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -155,9 +197,45 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "chat_app_api.Controllers.UserController",
+    "ContainingType": "chat_app_api.Controllers.SettingsController",
+    "Method": "GetDefaultGroupPic",
+    "RelativePath": "api/Settings/default-group-pic-url",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.SettingsController",
+    "Method": "GetDefaultProfilePic",
+    "RelativePath": "api/Settings/default-profile-pic-url",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.SettingsController",
+    "Method": "UpdateNotificationsSetting",
+    "RelativePath": "api/Settings/update-notifications-setting",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notificationSetting",
+        "Type": "chat_app_api.Models.NotificationUpdate",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "chat_app_api.Controllers.SettingsController",
     "Method": "GetUsers",
-    "RelativePath": "api/User/users",
+    "RelativePath": "api/Settings/users",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

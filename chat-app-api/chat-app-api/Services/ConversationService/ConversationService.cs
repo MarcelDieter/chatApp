@@ -1,8 +1,11 @@
-﻿using chat_app_api.Context;
-using chat_app_api.Models;
+﻿using AutoMapper;
+using chat_app_api.Context;
+using chat_app_api.Models.ConversationDTO;
 using chat_app_api.Models.Tables;
+using chat_app_api.Models.User;
 using chat_app_api.Services.ChatService;
 using chat_app_api.Services.WebSocketService;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
@@ -13,15 +16,19 @@ namespace chat_app_api.Services.NewFolder
         AppDbContext _dbContext;
         IHttpContextAccessor _httpContextAccessor;
         IWebSocketService _websocketService;
+        IWebHostEnvironment _webHostEnvironment;
+        IMapper _mapper;
         
-        public ConversationService(AppDbContext context, IHttpContextAccessor httpContextAccessor, IWebSocketService webSocketService)
+        public ConversationService(AppDbContext context, IHttpContextAccessor httpContextAccessor, IWebSocketService webSocketService, IMapper mapper, IWebHostEnvironment webHostEnvironment)
         {
             _dbContext = context;
             _httpContextAccessor = httpContextAccessor;
             _websocketService = webSocketService;
+            _mapper = mapper;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<ConversationDTO?> CreatingConversation(int user2Id)
+        public async Task<ConversationResponseDTO?> CreatingConversation(int user2Id)
         {
             var httpContext = _httpContextAccessor.HttpContext;
             if (httpContext == null)
@@ -41,7 +48,7 @@ namespace chat_app_api.Services.NewFolder
                 conversationId = await CreateConversationIfNotExisitng(userIds);
             }
             var conversationPartner = await _dbContext.Users.FindAsync(user2Id);
-            var newConversation = new ConversationDTO
+            var newConversation = new ConversationResponseDTO
             {
                 Id = conversationId,
                 MemberIds = userIds,
@@ -65,19 +72,14 @@ namespace chat_app_api.Services.NewFolder
 
         private async Task<int> CreateConversationIfNotExisitng(List<int> userIds)
         {
-            Conversation newConversation = new Conversation { };
+            Conversation newConversation = new Conversation{ };
             _dbContext.Conversations.Add(newConversation);
             await _dbContext.SaveChangesAsync();
-
-            foreach (int userId in userIds)
-            {
-                _dbContext.UserConversations.Add(new UserConversation { UserId = userId, ConversationId = newConversation.Id });
-            }
-            await _dbContext.SaveChangesAsync();
+            await AddUserConversationEntries(newConversation.Id, userIds);
             return newConversation.Id;
         }
 
-        public async Task<List<ConversationDTO>?> RetrieveConversations()
+        public async Task<List<ConversationResponseDTO>?> RetrieveConversations()
         {
             var httpContext = _httpContextAccessor.HttpContext;
             if (httpContext == null)
@@ -90,7 +92,7 @@ namespace chat_app_api.Services.NewFolder
                 return null;
             }
             int userId = int.Parse(userIdString);
-            List<ConversationDTO> conversations = await _dbContext.UserConversations
+            List<ConversationResponseDTO> conversations = await _dbContext.UserConversations
                 .Where(uc => uc.UserId == userId)
                 .Join(
                     _dbContext.Conversations,
@@ -109,12 +111,13 @@ namespace chat_app_api.Services.NewFolder
                 )
                 .GroupBy(
                     conv => conv.ucc.uc.ConversationId,
-                    (conversationId, entries) => new ConversationDTO
+                    (conversationId, entries) => new ConversationResponseDTO
                     {
                         Id = conversationId,
                         ConversationName = entries.FirstOrDefault().ucc.c.ConversationName,
                         ConversationPictureUrl = entries.FirstOrDefault().ucc.c.ConversationPictureUrl,
                         UnreadMessages = entries.FirstOrDefault().ucc.uc.UnreadMessages,
+                        GroupConversation = entries.FirstOrDefault().ucc.c.GroupConversation,
                         Messages = entries
                         .Where(x => x.m != null)
                         .OrderBy(m => m.m.Date)
@@ -178,6 +181,87 @@ namespace chat_app_api.Services.NewFolder
             unreadConversation.UnreadMessages = 0;
             await _dbContext.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<ConversationResponseDTO?> CreateGroup(ConversationRequestDTO conversationRequest)
+        {
+            var conversationPictureUrl = await AddGroupPicture(conversationRequest);
+            var newConversation = new Conversation()
+            {
+                ConversationName = conversationRequest.ConversationName,
+                ConversationPictureUrl = conversationPictureUrl,
+                GroupConversation = true
+
+            };
+
+            _dbContext.Conversations.Add(newConversation);
+            await _dbContext.SaveChangesAsync();
+
+            await AddUserConversationEntries(newConversation.Id, conversationRequest.MemberIds);
+
+            var conversation = new ConversationResponseDTO()
+            {
+                ConversationName = newConversation.ConversationName,
+                ConversationPictureUrl = conversationPictureUrl,
+                MemberIds = conversationRequest.MemberIds,
+                GroupConversation = true
+            };
+            _websocketService.CreateNewGroup(conversation);
+            return conversation;
+        }
+
+        private async Task AddUserConversationEntries(int conversationId, List<int> userIds)
+        {
+            var userConversationEntries = new List<UserConversation>();
+            foreach (int userId in userIds)
+            {
+                userConversationEntries.Add(new UserConversation { UserId = userId, ConversationId = conversationId });
+            }
+            _dbContext.UserConversations.AddRange(userConversationEntries);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        private async Task<string> AddGroupPicture(ConversationRequestDTO conversationRequest)
+        {
+            string imageUrl = "";
+            var httpContext = _httpContextAccessor.HttpContext;
+            if (httpContext != null)
+            {
+
+                string FilePath = _webHostEnvironment.WebRootPath + "\\ProfileAndGroupPics\\GroupPics\\IndividualGroupPics";
+                if (!Directory.Exists(FilePath))
+                {
+                    Directory.CreateDirectory(FilePath);
+                }
+
+                string imagePath = FilePath + "\\" + conversationRequest.ConversationName + "_groupPic.jpg";
+                if (File.Exists(imagePath))
+                {
+                    File.Delete(imagePath);
+                }
+
+                if (conversationRequest.ConversationPicture != null)
+                {
+                    using (FileStream stream = File.Create(imagePath))
+                    {
+                        await conversationRequest.ConversationPicture.CopyToAsync(stream);
+                    }
+                }
+                else
+                {
+                    string defaultPicFolderPath = _webHostEnvironment.WebRootPath + "\\ProfileAndGroupPics\\GroupPics\\DefaultGroupPic";
+                    if (Directory.Exists(defaultPicFolderPath))
+                    {
+                        var images = Directory.GetFiles(defaultPicFolderPath, "*.*", SearchOption.TopDirectoryOnly);
+                        string defaultPicPath = images[0];
+                        File.Copy(defaultPicPath, imagePath, overwrite: true);
+                    }
+                }
+                var request = httpContext.Request;
+                string hostUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
+                imageUrl = hostUrl + "/ProfileAndGroupPics/GroupPics/IndividualGroupPics/" + conversationRequest.ConversationName + "_groupPic.jpg";
+            }
+            return imageUrl;
         }
     }
 }

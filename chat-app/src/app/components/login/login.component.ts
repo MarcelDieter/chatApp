@@ -10,6 +10,8 @@ import { MaterialModule } from '../../modules/material.module';
 import { CurrentUserService } from '../../services/current-user.service';
 import { UserListService } from '../../services/user-list.service';
 import { ConversationService } from '../../services/conversation.service';
+import { SettingsService } from '../../services/settings.service';
+import { LoginUser } from '../../models/user';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,6 @@ import { ConversationService } from '../../services/conversation.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  loginForm?: FormGroup;
   loginSend = false;
 
   private dialog = inject(MatDialog);
@@ -34,37 +35,41 @@ export class LoginComponent implements OnInit {
   private userListService = inject(UserListService);
   private websocketService = inject(WebsocketService);
   private conversationService = inject(ConversationService);
+  private settingsService = inject(SettingsService);
 
   user = this.currentUserService.user;
+  loginForm = this.fb.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required],
+    wsId: '',
+  });
   
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      wsId: [null],
-    });
     // this.developmentLogin();
   }
 
   login() {
     this.loginSend = true;
-    if (this.loginForm?.valid) {
-      this.loginForm.patchValue({ wsId: this.websocketService.wsId});
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (loginResponse) => {
-          localStorage.setItem('authToken', loginResponse.tokens.accessToken);
-          localStorage.setItem('refreshToken', loginResponse.tokens.refreshToken);
-          this.dialogRef.close();
-          this.currentUserService.user.set(loginResponse.userDTO);
-          this.userListService.getAllUsers();
-          this.conversationService.getConversations();
-          this.loginSend = false;
-        },
-        error: (err) => {
-          alert(err.message);
-        },
-      });
+    if (!this.loginForm.value.username || !this.loginForm.value.password || !this.websocketService.wsId) {
+      return;
     }
+
+    this.loginForm.patchValue({ wsId: this.websocketService.wsId});
+    const loginObj: LoginUser = {
+      username: this.loginForm.value.username ?? '',
+      password: this.loginForm.value.password ?? '',
+      wsId: this.websocketService.wsId ?? ''
+    }
+    this.authService.verifyLogin(loginObj).subscribe({
+      next: loginResponse => {
+        this.authService.login(loginResponse);
+        this.dialogRef.close();
+        this.loginSend = false;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   openCreateAccount() {

@@ -40,7 +40,7 @@ namespace chat_app_api.Controllers
             {
                 return BadRequest();
             }
-            var result = await _authService.Login(userObj);
+            var result = await _authService.VerifyLogin(userObj);
 
             if (result == null)
             {
@@ -48,6 +48,18 @@ namespace chat_app_api.Controllers
             }
             return Ok(result);
         }
+
+        [HttpPost("check-if-logged-in/{wsId}")]
+        public async Task<ActionResult<LoginResponse>> CheckIfLoggedIn(string wsId)
+        {
+            var response = await _authService.CheckIfLoggedIn(wsId);
+            if (response == null)
+            {
+                return Unauthorized();
+            }
+            return Ok(response);
+        }
+
 
         [HttpPost("logout"), Authorize]
         public async Task<ActionResult> Logout()
@@ -77,13 +89,5 @@ namespace chat_app_api.Controllers
             await _authService.DeleteRefreshToken();
             return Ok(new {Message = "RefreshToken deleted successfully!"});
         }
-
-        [HttpGet("default-pic-url")]
-        public IActionResult GetDefaultPicUrl()
-        {
-            string profilePicUrl = _authService.GetDefaultPicUrl();
-            return Ok(new {url = profilePicUrl});
-        }
-
     }
 }

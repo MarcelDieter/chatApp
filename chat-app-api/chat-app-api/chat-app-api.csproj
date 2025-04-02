@@ -25,8 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Helpers\" />
-    <Folder Include="wwwroot\ProfilePics\" />
+    <Folder Include="wwwroot\ProfileAndGroupPics\GroupPics\IndividualGroupPics\" />
+    <Folder Include="wwwroot\ProfileAndGroupPics\ProfilePics\DefaultProfilePic\" />
   </ItemGroup>
 
 </Project>

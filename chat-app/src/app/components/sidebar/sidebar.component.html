@@ -16,10 +16,12 @@
         <span [matBadge]="conversation.unreadMessages" [matBadgeHidden]="!conversation.unreadMessages || !notificationsOn()" matBadgeOverlap="false">{{ conversation.conversationName }}</span>
       </h3>
       <p matListItemLine>
-        @if (user?.active) {
-          <mat-icon style='color: lightgreen'>check_circle</mat-icon>
-        } @else {
-          <mat-icon style='color: red'>close</mat-icon>
+        @if (!conversation.groupConversation) {
+          @if (user?.active) {
+            <mat-icon style='color: lightgreen'>check_circle</mat-icon>
+          } @else {
+            <mat-icon style='color: red'>close</mat-icon>
+          }
         }
       </p>
     </button>

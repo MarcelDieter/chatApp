@@ -1,10 +1,11 @@
 import { Message } from './message';
 
 export interface Conversation {
-  id: number;
-  conversationName?: string;
+  id: number,
+  conversationName?: string,
   conversationPictureUrl?: string,
-  messages: Message[];
-  memberIds : number[]; 
-  unreadMessages: number;
+  groupConversation: boolean,
+  messages: Message[],
+  memberIds : number[], 
+  unreadMessages: number
 }

@@ -19,22 +19,26 @@ export class WebsocketService {
     this.wsId = uuidv4();
     this.ws = new WebSocket(`ws://localhost:8181?wsId=${this.wsId}`);
     this.ws.onmessage = (message) => {
-      const obj: InformationMessage = JSON.parse(message.data);
-      switch (obj.type) {
+      const messageObj: InformationMessage = JSON.parse(message.data);
+      switch (messageObj.type) {
         case 'chatMessage': {
-          this.conversationService.updateMessages(obj);
+          this.conversationService.updateMessages(messageObj);
           break;
         }
         case 'newUser': {
-          this.userListService.addToList(obj);
+          this.userListService.addToList(messageObj);
           break;
         }
         case 'userActivity': {
-          this.userListService.updateUserActivity(obj);
+          this.userListService.updateUserActivity(messageObj);
+          break;
+        }
+        case 'newConversation': {
+          this.conversationService.addNewGroup(messageObj);
           break;
         }
         default: 
-        console.log(`Unknown websocket message received: ${obj}`)
+        console.log(`Unknown websocket message received: ${messageObj}`)
       }
     };
   }

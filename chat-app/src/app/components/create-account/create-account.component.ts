@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { MaterialModule } from '../../modules/material.module';
 import { FormsModule } from '../../modules/forms.module';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-create-account',
@@ -13,25 +14,26 @@ import { FormsModule } from '../../modules/forms.module';
   styleUrl: './create-account.component.scss',
 })
 export class CreateAccountComponent implements OnInit {
-  createForm?: FormGroup;
-  selectedFile?: File;
   usernameErrorMessage = '';
   createAccountMessage = ''
   imageDisplayed = '';
   accountCreated = false;
+  selectedFile?: File;
 
   private dialogRef = inject(MatDialogRef<LoginComponent>);
   private dialog = inject(MatDialog);
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private SettingsService = inject(SettingsService);
 
+  createForm = this.fb.group({
+    username: ['', Validators.required],
+    password: ['', Validators.required]
+  });
+
+  
   ngOnInit(): void {
-    this.createForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      profilePic: [null],
-    });
-    this.authService.getDefaultProfilePic().subscribe({
+    this.SettingsService.getDefaultProfilePic().subscribe({
       next: res => {
         this.imageDisplayed = res.url
       },
@@ -42,12 +44,13 @@ export class CreateAccountComponent implements OnInit {
   }
 
   createAccount() {
-    if (!this.createForm?.valid) {
+    const formValues = this.createForm.value;
+
+    if (!formValues.password || !formValues.username) {
       return;
     }
-    const formValues = this.createForm.value;
+    
     const formData = new FormData();
-
     formData.append('username', formValues.username);
     formData.append('password', formValues.password);
     if (this.selectedFile) {
@@ -79,22 +82,19 @@ export class CreateAccountComponent implements OnInit {
     const input = event.target as HTMLInputElement;
 
     if (input.files && input.files[0]) {
+      this.previewImage(input.files[0]);
       this.selectedFile = input.files[0];
-      this.previewImage();
-      if (this.createForm) {
-        this.createForm.patchValue({ profilePicUrl: this.selectedFile });
-      }
     }
   }
 
-  previewImage() {
+  previewImage(selectedFile: File | undefined) {
     const reader = new FileReader();
 
     reader.onload = () => {
       this.imageDisplayed = <string>reader.result; 
     }
-    if (this.selectedFile) {
-      reader.readAsDataURL(this.selectedFile);
+    if (selectedFile) {
+      reader.readAsDataURL(selectedFile);
     }
   }
 

@@ -7,13 +7,10 @@ namespace chat_app_api.Services.AuthService
     public interface IAuthService
     {
         Task<User?> Register(RegisterUser user);
-        Task<LoginResponse?> Login(LoginUser user);
-
+        Task<LoginResponse?> VerifyLogin(LoginUser user);
+        Task<LoginResponse?> CheckIfLoggedIn(string wsId);
         Task<TokenResponse?> RefreshTokensAsync(RefreshTokenRequest req);
-
         Task<bool> Logout();
         Task DeleteRefreshToken();
-
-        string GetDefaultPicUrl();
     }
 }

@@ -14,4 +14,5 @@ export interface RegisterUser {
 export interface LoginUser {
   username: string;
   password: string;
+  wsId: string;
 }

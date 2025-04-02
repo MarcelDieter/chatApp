@@ -36,6 +36,9 @@ namespace chat_app_api.Migrations
                     b.Property<string>("ConversationPictureUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("GroupConversation")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Conversations");
@@ -79,11 +82,18 @@ namespace chat_app_api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<bool>("Active")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("HashedPassword")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("NotificationsOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<string>("ProfilePicUrl")
                         .IsRequired()
@@ -120,7 +130,9 @@ namespace chat_app_api.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("UnreadMessages")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("UserId", "ConversationId");
 

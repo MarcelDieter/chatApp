@@ -1,6 +1,8 @@
-wwwroot\DefaultProfilePic\test.jpg
-wwwroot\ProfilePics\1_profilePic.jpg
-wwwroot\ProfilePics\2_profilePic.jpg
-wwwroot\ProfilePics\3_profilePic.jpg
-wwwroot\ProfilePics\4_profilePic.jpg
-wwwroot\ProfilePics\8_profilePic.jpg
+wwwroot\ProfileAndGroupPics\GroupPics\DefaultGroupPic\shutterstock_479863729-1000x600sfw.jpg
+wwwroot\ProfileAndGroupPics\GroupPics\IndividualGroupPics\_groupPic.jpg
+wwwroot\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\1_profilePic.jpg
+wwwroot\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\2_profilePic.jpg
+wwwroot\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\3_profilePic.jpg
+wwwroot\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\5_profilePic.jpg
+wwwroot\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\6_profilePic.jpg
+wwwroot\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\7_profilePic.jpg

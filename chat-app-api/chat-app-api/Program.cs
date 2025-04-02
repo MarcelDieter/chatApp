@@ -14,6 +14,7 @@ using chat_app_api.Services.WebSocketService;
 using chat_app_api.Services.ChatService;
 using chat_app_api.Services.NewFolder;
 using chat_app_api.Services.MessageService;
+using chat_app_api.Services.SettingsService;
 //using chat_app_api.Services.ChatService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,10 +51,13 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddAuthorization();
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMessageService, MessageService>();
 builder.Services.AddScoped<IConversationService, ConversationService>();
+builder.Services.AddScoped<ISettingsService, SettingsService>();
 builder.Services.AddSingleton<IWebSocketService, WebSocketService>();
 
 builder.Services.AddHttpContextAccessor();
@@ -91,6 +95,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseCors("MyPolicy");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

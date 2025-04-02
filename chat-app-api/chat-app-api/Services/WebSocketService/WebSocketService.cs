@@ -5,6 +5,9 @@ using chat_app_api.Services.MessageService;
 using System.Text.Json;
 using chat_app_api.Models.Tables;
 using chat_app_api.Models.User;
+using chat_app_api.Models.ConversationDTO;
+using Microsoft.AspNetCore.Mvc.Formatters;
+//using Newtonsoft.Json;
 
 namespace chat_app_api.Services.WebSocketService
 {
@@ -57,7 +60,8 @@ namespace chat_app_api.Services.WebSocketService
                     var messageService = scope.ServiceProvider.GetRequiredService<IMessageService>();
                     messageObject.Id = await messageService.StoreMessage(messageObject);
                     }
-                    SendMessageToConversation(messageObject);
+                    string jsonString = ConvertToJson("chatMessage", messageObject);
+                    SendMessageToConversation(messageObject.ConversationId, jsonString);
                     }
                };
             });
@@ -71,13 +75,12 @@ namespace chat_app_api.Services.WebSocketService
             }
         }
 
-        private void SendMessageToConversation(Message message)
+        private void SendMessageToConversation(int conversationId, string message)
         {
-            string jsonString = ConvertToJson("chatMessage", message);
-            var conversationConnections = _wsConversationConnections[message.ConversationId];
+            var conversationConnections = _wsConversationConnections[conversationId];
             foreach (var connection in conversationConnections)
             {
-                connection.Send(jsonString);
+                connection.Send(message);
             }
         }
 
@@ -125,7 +128,7 @@ namespace chat_app_api.Services.WebSocketService
             return JsonSerializer.Serialize(newMessage, serializeOptions);
         }
 
-        public void StartConversation(ConversationDTO conversationDTO)
+        public void StartConversation(ConversationResponseDTO conversationDTO)
         {
             if (_wsConversationConnections.ContainsKey(conversationDTO.Id))
             {
@@ -134,13 +137,23 @@ namespace chat_app_api.Services.WebSocketService
            var connections = new List<IWebSocketConnection>();
             foreach (var memberId in conversationDTO.MemberIds)
             {
-                var connection = _wsLoggedInConnections[memberId];
-                if (connection != null)
+                if (_wsLoggedInConnections.ContainsKey(memberId))
                 {
-                connections.Add(connection);
+                    var connection = _wsLoggedInConnections[memberId];
+                    if (connection != null)
+                    {
+                    connections.Add(connection);
+                    }
                 }
             }
             _wsConversationConnections.Add(conversationDTO.Id, connections);
+        }
+
+        public void CreateNewGroup(ConversationResponseDTO conversation)
+        {
+            StartConversation(conversation);
+            var newConversationMessage = ConvertToJson("newConversation", conversation);
+            SendMessageToConversation(conversation.Id, newConversationMessage);
         }
         
 
@@ -160,7 +173,8 @@ namespace chat_app_api.Services.WebSocketService
 
         public void SendNewUserMessage(UserDTO userDTO)
         {
-            SendMessageToAll(ConvertToJson("newUser", userDTO));
+            var newUserMessage = ConvertToJson("newUser", userDTO);
+            SendMessageToAll(newUserMessage);
         }
     }
 }

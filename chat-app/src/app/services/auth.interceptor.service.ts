@@ -3,15 +3,17 @@ import { inject, Injectable} from '@angular/core';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 import { TokenResponse } from '../models/token-response';
+import { CurrentUserService } from './current-user.service';
 
 @Injectable()  
 export class AuthInterceptor implements HttpInterceptor {
   private authService = inject(AuthService);
+  private currentUserService = inject(CurrentUserService);
   
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('authToken');
     if (token) {
-      req = this.addTokenHeader(req, token);
+      req = this.addTokenHeader(req, token)
     }
     return next.handle(req).pipe(catchError(errordata => {
       if (errordata.status == 401) {
@@ -31,8 +33,8 @@ export class AuthInterceptor implements HttpInterceptor {
         return next.handle(req);
       }),
       catchError(errordata => {
-        // this.userDataService.loggedIn.set(false);
-        // this.userDataService.clearStorage();
+        this.currentUserService.user.set(null);
+        localStorage.clear();
         return throwError(() => new Error(errordata.message));
       })
     );

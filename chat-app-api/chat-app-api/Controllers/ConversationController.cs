@@ -1,8 +1,11 @@
-﻿using chat_app_api.Services.ChatService;
+﻿using chat_app_api.Models.ConversationDTO;
+using chat_app_api.Services.ChatService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace chat_app_api.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConversationController : ControllerBase
@@ -18,6 +21,13 @@ namespace chat_app_api.Controllers
         public async Task<IActionResult> StartConversation(int userId)
         {
             var conversation = await _conversationService.CreatingConversation(userId);
+            return Ok(conversation);
+        }
+
+        [HttpPost("create-group")]
+        public async Task<IActionResult> CreateGroup([FromForm]  ConversationRequestDTO newConversation)
+        {
+            var conversation = await _conversationService.CreateGroup(newConversation);
             return Ok(conversation);
         }
 
@@ -38,10 +48,5 @@ namespace chat_app_api.Controllers
             }
             return Ok("Unread Messages successful reseted!");
         } 
-        //[HttpPost("start-group-conversation")]
-        //public async Task<IActionResult> StartGroupConversation([FromBody] )
-        //{
-        //    var chatId = await _conv
-        //}
     }
 }

@@ -1,3 +1,5 @@
+import { timestamp } from 'rxjs';
+
 export class TimeAndDate {
   date: Date;
   time: string;
@@ -52,6 +54,9 @@ export class TimeAndDate {
       else if (currentDate.day - this.day <= 6) {
         timeStamp = this.getDayOfWeek();
       } 
+      else {
+        timeStamp = `${this.day}. ${this.month}`;
+      }
     }
     else {
       timeStamp = `${this.day}. ${this.month}`;

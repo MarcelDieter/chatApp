@@ -1,112 +1,148 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DefaultProfilePic\test.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\GroupPics\DefaultGroupPic\shutterstock_479863729-1000x600sfw.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>chat-app-api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/chat-app-api</BasePath>
-      <RelativePath>DefaultProfilePic/test.jpg</RelativePath>
+      <RelativePath>ProfileAndGroupPics/GroupPics/DefaultGroupPic/shutterstock_479863729-1000x600sfw.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qcve5yby9m</Fingerprint>
-      <Integrity>OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=</Integrity>
+      <Fingerprint>ulhzlnsl5l</Fingerprint>
+      <Integrity>4jQyR002y/Yj4h9RdYmWKLBcr7ODniS04zs8RLGEd2A=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\DefaultProfilePic\test.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\GroupPics\DefaultGroupPic\shutterstock_479863729-1000x600sfw.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\1_profilePic.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\GroupPics\IndividualGroupPics\_groupPic.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>chat-app-api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/chat-app-api</BasePath>
-      <RelativePath>ProfilePics/1_profilePic.jpg</RelativePath>
+      <RelativePath>ProfileAndGroupPics/GroupPics/IndividualGroupPics/_groupPic.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qcve5yby9m</Fingerprint>
-      <Integrity>OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=</Integrity>
+      <Fingerprint>ulhzlnsl5l</Fingerprint>
+      <Integrity>4jQyR002y/Yj4h9RdYmWKLBcr7ODniS04zs8RLGEd2A=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\1_profilePic.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\GroupPics\IndividualGroupPics\_groupPic.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\2_profilePic.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\1_profilePic.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>chat-app-api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/chat-app-api</BasePath>
-      <RelativePath>ProfilePics/2_profilePic.jpg</RelativePath>
+      <RelativePath>ProfileAndGroupPics/ProfilePics/IndividualProfilePics/1_profilePic.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qcve5yby9m</Fingerprint>
-      <Integrity>OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=</Integrity>
+      <Fingerprint>o6x7trmggv</Fingerprint>
+      <Integrity>QHPIIVIDqZPK5Yj6hcbpf5XjNMQ2h5cVV9arA1wC2Z4=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\2_profilePic.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\1_profilePic.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\3_profilePic.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\2_profilePic.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>chat-app-api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/chat-app-api</BasePath>
-      <RelativePath>ProfilePics/3_profilePic.jpg</RelativePath>
+      <RelativePath>ProfileAndGroupPics/ProfilePics/IndividualProfilePics/2_profilePic.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qcve5yby9m</Fingerprint>
-      <Integrity>OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=</Integrity>
+      <Fingerprint>ulhzlnsl5l</Fingerprint>
+      <Integrity>4jQyR002y/Yj4h9RdYmWKLBcr7ODniS04zs8RLGEd2A=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\3_profilePic.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\2_profilePic.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\4_profilePic.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\3_profilePic.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>chat-app-api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/chat-app-api</BasePath>
-      <RelativePath>ProfilePics/4_profilePic.jpg</RelativePath>
+      <RelativePath>ProfileAndGroupPics/ProfilePics/IndividualProfilePics/3_profilePic.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qcve5yby9m</Fingerprint>
-      <Integrity>OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=</Integrity>
+      <Fingerprint>j6gbpsyklv</Fingerprint>
+      <Integrity>q+9AwICk//htC0+gYrHSNTBQSXaWdKxv96oEagj3L/o=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\4_profilePic.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\3_profilePic.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\8_profilePic.jpg'))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\5_profilePic.jpg'))">
       <SourceType>Package</SourceType>
       <SourceId>chat-app-api</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/chat-app-api</BasePath>
-      <RelativePath>ProfilePics/8_profilePic.jpg</RelativePath>
+      <RelativePath>ProfileAndGroupPics/ProfilePics/IndividualProfilePics/5_profilePic.jpg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>qcve5yby9m</Fingerprint>
-      <Integrity>OrMfhA3HrdkyJexSeEVhLrPoby5YDJmpLOqO5ufREYw=</Integrity>
+      <Fingerprint>j6gbpsyklv</Fingerprint>
+      <Integrity>q+9AwICk//htC0+gYrHSNTBQSXaWdKxv96oEagj3L/o=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfilePics\8_profilePic.jpg'))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\5_profilePic.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\6_profilePic.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>chat-app-api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/chat-app-api</BasePath>
+      <RelativePath>ProfileAndGroupPics/ProfilePics/IndividualProfilePics/6_profilePic.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>j6gbpsyklv</Fingerprint>
+      <Integrity>q+9AwICk//htC0+gYrHSNTBQSXaWdKxv96oEagj3L/o=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\6_profilePic.jpg'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\7_profilePic.jpg'))">
+      <SourceType>Package</SourceType>
+      <SourceId>chat-app-api</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/chat-app-api</BasePath>
+      <RelativePath>ProfileAndGroupPics/ProfilePics/IndividualProfilePics/7_profilePic.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>j6gbpsyklv</Fingerprint>
+      <Integrity>q+9AwICk//htC0+gYrHSNTBQSXaWdKxv96oEagj3L/o=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\ProfileAndGroupPics\ProfilePics\IndividualProfilePics\7_profilePic.jpg'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

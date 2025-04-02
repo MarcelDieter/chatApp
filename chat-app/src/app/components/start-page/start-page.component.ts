@@ -6,6 +6,7 @@ import { MatSliderModule }  from '@angular/material/slider'
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { WebsocketService } from '../../services/websocket.service';
+import { CurrentUserService } from '../../services/current-user.service';
 
 @Component({
   selector: 'app-start-page',
@@ -17,9 +18,19 @@ export class StartPageComponent implements OnInit{
   loginForm?: FormGroup;
 
   private dialog = inject(MatDialog);
+  private authService = inject(AuthService);
+  private currentUserService = inject(CurrentUserService);
 
   ngOnInit() {
-    this.dialog.open(LoginComponent);
+    // this.dialog.open(LoginComponent);
+    this.authService.checkIfLoggedIn().subscribe({
+      next: res => {
+        this.authService.login(res);
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
   }
 
   openLogin() {

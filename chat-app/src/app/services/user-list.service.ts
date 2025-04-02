@@ -4,19 +4,20 @@ import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { UserDTO } from '../models/user';
 import { InformationMessage } from '../models/websocket-messages';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserListService {
-  baseUrl = 'https://localhost:7062/api/user';
+  api = environment.baseUrl + 'settings';
   createForm?: FormGroup;
   users = signal<UserDTO[]>([]);
   
   private http = inject(HttpClient);
   
   getUsers(): Observable<UserDTO[]> {
-    return this.http.get<UserDTO[]>(`${this.baseUrl}/users`);
+    return this.http.get<UserDTO[]>(`${this.api}/users`);
   }
 
   getAllUsers() {
@@ -50,7 +51,9 @@ export class UserListService {
   }
  
   getUserById(userId: number) {
-    return this.users().find(user => user.userId == userId);
+    let userList = this.users();
+    let user = this.users().find((user) => user.userId == userId);
+    return user;
   }
 
 }

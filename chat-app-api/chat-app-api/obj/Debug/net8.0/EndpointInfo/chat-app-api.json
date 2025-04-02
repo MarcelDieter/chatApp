@@ -30,7 +30,7 @@
                   "Password": {
                     "type": "string"
                   },
-                  "ProfilePicUrl": {
+                  "ProfilePic": {
                     "type": "string",
                     "format": "binary"
                   }
@@ -46,7 +46,7 @@
                 "Password": {
                   "style": "form"
                 },
-                "ProfilePicUrl": {
+                "ProfilePic": {
                   "style": "form"
                 }
               }
@@ -84,6 +84,45 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Auth/check-if-logged-in/{wsId}": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "parameters": [
+          {
+            "name": "wsId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -191,18 +230,6 @@
         }
       }
     },
-    "/api/Auth/default-pic-url": {
-      "get": {
-        "tags": [
-          "Auth"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Conversation/start-conversation/{userId}": {
       "post": {
         "tags": [
@@ -222,8 +249,78 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/Conversation/create-group": {
+      "post": {
+        "tags": [
+          "Conversation"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ConversationName": {
+                    "type": "string"
+                  },
+                  "ConversationPicture": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "MemberIds": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "format": "int32"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "ConversationName": {
+                  "style": "form"
+                },
+                "ConversationPicture": {
+                  "style": "form"
+                },
+                "MemberIds": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Conversation/retrieve-conversations": {
@@ -234,8 +331,19 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
       }
     },
     "/api/Conversation/reset-unread-messages/{conversationId}": {
@@ -257,14 +365,80 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [ ]
+          }
+        ]
+      }
+    },
+    "/api/Settings/update-notifications-setting": {
+      "post": {
+        "tags": [
+          "Settings"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationUpdate"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationUpdate"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/NotificationUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
     },
-    "/api/User/users": {
+    "/api/Settings/users": {
       "get": {
         "tags": [
-          "User"
+          "Settings"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Settings/default-profile-pic-url": {
+      "get": {
+        "tags": [
+          "Settings"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Settings/default-group-pic-url": {
+      "get": {
+        "tags": [
+          "Settings"
         ],
         "responses": {
           "200": {
@@ -328,6 +502,7 @@
     "schemas": {
       "LoginResponse": {
         "required": [
+          "settings",
           "tokens",
           "userDTO"
         ],
@@ -335,6 +510,9 @@
         "properties": {
           "userDTO": {
             "$ref": "#/components/schemas/UserDTO"
+          },
+          "settings": {
+            "$ref": "#/components/schemas/Settings"
           },
           "tokens": {
             "$ref": "#/components/schemas/TokenResponse"
@@ -365,6 +543,15 @@
         },
         "additionalProperties": false
       },
+      "NotificationUpdate": {
+        "type": "object",
+        "properties": {
+          "notificationOn": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "RefreshTokenRequest": {
         "required": [
           "refreshToken"
@@ -378,6 +565,15 @@
           "refreshToken": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Settings": {
+        "type": "object",
+        "properties": {
+          "notificationsOn": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false

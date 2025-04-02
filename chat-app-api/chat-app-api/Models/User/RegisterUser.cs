@@ -8,7 +8,7 @@ namespace chat_app_api.Models.User
         public int Id { get; set; }
         public required string Username { get; set; }
         public required string Password { get; set; }
-        public IFormFile? ProfilePicUrl { get; set; }
+        public IFormFile? ProfilePic { get; set; }
 
 
     }

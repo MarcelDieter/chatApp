@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using chat_app_api.Context;
+using chat_app_api.Models;
 using chat_app_api.Models.Response;
 using chat_app_api.Models.Tables;
 using chat_app_api.Models.User;
@@ -18,21 +19,21 @@ namespace chat_app_api.Services.AuthService
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly IHttpContextAccessor _httpcontextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IWebSocketService _webSocketService;
         private readonly IMapper _mapper;
 
-        public AuthService(AppDbContext context, IConfiguration configuration, IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpcontextAccessor, IWebSocketService webSocketService, IMapper mapper)
+        public AuthService(AppDbContext context, IConfiguration configuration, IWebHostEnvironment webHostEnvironment, IHttpContextAccessor httpContextAccessor, IWebSocketService webSocketService, IMapper mapper)
         {
             _context = context;
             _configuration = configuration;
             _webHostEnvironment = webHostEnvironment;
-            _httpcontextAccessor = httpcontextAccessor;
+            _httpContextAccessor = httpContextAccessor;
             _webSocketService = webSocketService;
             _mapper = mapper;
         }
 
-        public async Task<LoginResponse?> Login(LoginUser userObj)
+        public async Task<LoginResponse?> VerifyLogin(LoginUser userObj)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == userObj.Username);
             if (user == null)
@@ -43,9 +44,40 @@ namespace chat_app_api.Services.AuthService
             {
                 return null;
             }
+            var response = await Login(user, userObj.WsId);
+            return response;
+        }
+
+        public async Task<LoginResponse?> CheckIfLoggedIn(string wsId)
+        {
+            var httpContext = _httpContextAccessor.HttpContext;
+            if (httpContext == null)
+            {
+                return null;
+            }
+
+            var userIdString = httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userIdString == null)
+            {
+                return null;
+            }
+
+            var userId = int.Parse(userIdString);
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return null;
+            }
+
+            var response = await Login(user, wsId);
+            return response;
+        }
+
+        private async Task<LoginResponse?> Login(User user, string wsId)
+        {
             await UpdateActiveStatus(user, true);
+            _webSocketService.Login(user.UserId, wsId);
             LoginResponse response = await CreateLoginResponse(user);
-            _webSocketService.Login(user.UserId, userObj.WsId);
             return response;
         }
 
@@ -65,7 +97,11 @@ namespace chat_app_api.Services.AuthService
                     UserId = user.UserId,
                     Username = user.Username,
                     ProfilePicUrl = user.ProfilePicUrl,
-                    Active = user.Active,
+                    Active = user.Active
+                },
+                Settings = new Settings
+                {
+                    NotificationsOn = user.NotificationsOn
                 },
                 Tokens = await CreateTokenResponse(user)
             };
@@ -96,10 +132,7 @@ namespace chat_app_api.Services.AuthService
             {
                 Username = userObj.Username,
                 HashedPassword = passwordHash,
-                ProfilePicUrl = imageUrl,
-                Active = false,
-                Role = "User",
-                RefreshToken = ""
+                ProfilePicUrl = imageUrl
             };
 
             await _context.Users.AddAsync(user);
@@ -149,18 +182,20 @@ namespace chat_app_api.Services.AuthService
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim>
+       
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                 new Claim(ClaimTypes.Role, user.Role)
             };
             string? appSettingsToken = _configuration.GetValue<string>("AppSettings:Token");
+
             if (appSettingsToken == null) 
             {
                 return "";
             }
-            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettingsToken));
 
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appSettingsToken));
             SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
             JwtSecurityToken tokenDescriptor = new JwtSecurityToken(
@@ -178,7 +213,7 @@ namespace chat_app_api.Services.AuthService
 
         public async Task DeleteRefreshToken()
         {
-            var httpContext = _httpcontextAccessor.HttpContext;
+            var httpContext = _httpContextAccessor.HttpContext;
             if (httpContext == null)
             {
                 return;
@@ -198,14 +233,16 @@ namespace chat_app_api.Services.AuthService
             }
         }
 
-        private async Task<string> AddProfilePicture(RegisterUser user)
+        private async Task<string?> AddProfilePicture(RegisterUser user)
         {
-            string imageUrl = "";
-            var httpContext = _httpcontextAccessor.HttpContext;
-            if (httpContext != null)
+            var httpContext = _httpContextAccessor.HttpContext;
+
+            if (httpContext == null)
             {
-           
-            string FilePath = _webHostEnvironment.WebRootPath + "\\ProfilePics\\";
+                return null;
+            }
+
+            string FilePath = _webHostEnvironment.WebRootPath + "\\ProfileAndGroupPics\\ProfilePics\\IndividualProfilePics";
             if (!Directory.Exists(FilePath))
             {
                 Directory.CreateDirectory(FilePath);
@@ -217,16 +254,16 @@ namespace chat_app_api.Services.AuthService
                 File.Delete(imagePath);
             }
 
-            if (user.ProfilePicUrl != null)
+            if (user.ProfilePic != null)
             {
                 using (FileStream stream = File.Create(imagePath))
                 {
-                    await user.ProfilePicUrl.CopyToAsync(stream);
+                    await user.ProfilePic.CopyToAsync(stream);
                 }
             }
             else
             {
-                string defaultPicFolderPath = _webHostEnvironment.WebRootPath + "\\DefaultProfilePic";
+                string defaultPicFolderPath = _webHostEnvironment.WebRootPath + "\\ProfileAndGroupPics\\ProfilePics\\DefaultProfilePic";
                 if (Directory.Exists(defaultPicFolderPath))
                 {
                     var images = Directory.GetFiles(defaultPicFolderPath, "*.*",SearchOption.TopDirectoryOnly);
@@ -236,14 +273,13 @@ namespace chat_app_api.Services.AuthService
             }
             var request = httpContext.Request;
             string hostUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
-            imageUrl = hostUrl + "/ProfilePics/" + user.Username + "_profilePic.jpg";
-            }
+            var imageUrl = hostUrl + "/ProfileAndGroupPics/ProfilePics/IndividualProfilePics/" + user.Username + "_profilePic.jpg";
             return imageUrl;
         }
 
         public async Task<bool> Logout()
         {
-            var httpContext = _httpcontextAccessor.HttpContext;
+            var httpContext = _httpContextAccessor.HttpContext;
             if (httpContext == null ||httpContext.User == null) {
                 return false;
             }
@@ -260,32 +296,9 @@ namespace chat_app_api.Services.AuthService
             }
             await UpdateActiveStatus(user, false);
             _webSocketService.Logout(user.UserId);
-
             return true;
         }
 
-        public string GetDefaultPicUrl()
-        {
-            string defaultPicFolderPath = _webHostEnvironment.WebRootPath + "\\DefaultProfilePic";
-            if (!Directory.Exists(defaultPicFolderPath))
-            {
-                return "";
-            }
-            var images = Directory.GetFiles(defaultPicFolderPath, "*.*", SearchOption.TopDirectoryOnly);
-            var firstImageName = Path.GetFileName(images[0]);
-            string defaultPicPath = "/DefaultProfilePic/";
-            var httpContext = _httpcontextAccessor.HttpContext;
-
-            if (httpContext == null)
-            {
-                return "";
-            }
-            var request = httpContext.Request;
-            string hostUrl = $"{request.Scheme}://{request.Host}{request.PathBase}";
-            string fullUrl = hostUrl + "/DefaultProfilePic/" + firstImageName;
-
-            return fullUrl;
-        }
     }
         
 }

@@ -9,8 +9,8 @@
         <mat-icon class='custom-icon-size'>login</mat-icon>
       </button>
     } @else {
-        <img [src]='user()?.profilePicUrl' alt='ProfilBild' matTooltip={{user()?.username}}>
-        <button mat-icon-button (click)='logout(user()?.username)'>
+        <img [src]='getProfielPic()' alt='ProfilBild' matTooltip={{user()?.username}}>
+        <button mat-icon-button (click)='logout()'>
         <mat-icon class='custom-icon-size'>logout</mat-icon>
       </button>
     }
@@ -21,11 +21,11 @@
 </mat-toolbar>
 
 
-<mat-menu #menu='matMenu' class='settings-menu'>
-  <button mat-menu-item>
+<mat-menu search #menu='matMenu' class='settings-menu'>
+  <button mat-menu-item (click)='$event.stopPropagation()'>
     <mat-icon>notifications</mat-icon>
     <span>Notifications</span>
-    <mat-slide-toggle [(ngModel)]='isChecked'></mat-slide-toggle>
+    <mat-slide-toggle [checked]='notificationsOn' (change)='changeToggle($event)'></mat-slide-toggle>
   </button>  
   <button mat-menu-item>
     <mat-icon>visibility</mat-icon>

@@ -9,6 +9,7 @@ namespace chat_app_api.Models.Tables
         public int Id { get; set; }
         public string? ConversationName { get; set; }
         public string? ConversationPictureUrl { get; set; }
+        public bool GroupConversation { get; set; }
         public List<Message>? Messages { get; set; }
         [JsonIgnore]
         public List<UserConversation>? UserConversation { get; set; }
